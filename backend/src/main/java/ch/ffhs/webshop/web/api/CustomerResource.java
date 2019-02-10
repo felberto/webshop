@@ -2,7 +2,6 @@ package ch.ffhs.webshop.web.api;
 
 import ch.ffhs.webshop.domain.Customer;
 import ch.ffhs.webshop.service.CustomerService;
-import jdk.internal.jline.internal.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -36,10 +35,10 @@ public class CustomerResource {
         return customerService.save(customer);
     }
 
+
     @PutMapping(value = "/customer/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void update(@PathVariable("id") Long id, @RequestBody Customer customer) {
-        Preconditions.checkNotNull(customer);
         customerService.findOne(customer.getId());
         customerService.update(customer);
     }
