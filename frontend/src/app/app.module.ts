@@ -5,6 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LayoutModule} from "./layouts/layout.module";
 import {RegistrationModule} from "./registration/registration.module";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import {RegistrationModule} from "./registration/registration.module";
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgbModule,
     LayoutModule,
     RegistrationModule
   ],

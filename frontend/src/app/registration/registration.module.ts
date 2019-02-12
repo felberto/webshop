@@ -2,7 +2,7 @@ import {NgModule} from "@angular/core";
 import {RegistrationComponent} from "./registration.component";
 import {CustomerService} from "../services/customer.service";
 import {BrowserModule} from "@angular/platform-browser";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
@@ -10,7 +10,7 @@ import {HttpClientModule} from "@angular/common/http";
     RegistrationComponent
   ],
   exports: [RegistrationComponent],
-  imports: [BrowserModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, FormsModule, HttpClientModule, ReactiveFormsModule],
   providers: [CustomerService]
 })
 export class RegistrationModule {
