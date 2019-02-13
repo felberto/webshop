@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {CustomerService} from "../services/customer.service";
-import {Customer} from "../models/customer";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {first} from "rxjs/operators";
-import {AlertService} from "../services/alert.service";
 import {Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'registration',
@@ -12,12 +11,11 @@ import {Router} from "@angular/router";
 })
 export class RegistrationComponent implements OnInit {
 
-  customer: Customer = new Customer();
   registerForm: FormGroup;
   loading = false;
   submitted = false;
 
-  constructor(private customerService: CustomerService, private formBuilder: FormBuilder, private router: Router, private alertService: AlertService) {
+  constructor(private customerService: CustomerService, private formBuilder: FormBuilder, private router: Router, private toastr: ToastrService) {
 
   }
 
@@ -48,11 +46,16 @@ export class RegistrationComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.alertService.success('Registration successful', true);
-          this.router.navigate(['/login']);
+
+          this.toastr.success("Customer successfully registered", "", {
+            positionClass: "toast-bottom-right"
+          });
+          this.router.navigate(['/']);
         },
         error => {
-          this.alertService.error(error);
+          this.toastr.error("Customer registration failed", "", {
+            positionClass: "toast-bottom-right"
+          });
           this.loading = false;
         });
   }

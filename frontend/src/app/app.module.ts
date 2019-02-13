@@ -6,6 +6,8 @@ import {AppComponent} from './app.component';
 import {LayoutModule} from "./layouts/layout.module";
 import {RegistrationModule} from "./registration/registration.module";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     LayoutModule,
     RegistrationModule
   ],
