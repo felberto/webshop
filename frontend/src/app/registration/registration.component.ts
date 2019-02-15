@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {first} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
+import {PasswordValidation} from "../shared/validators/PasswordValidation";
 
 @Component({
   selector: 'registration',
@@ -24,10 +25,9 @@ export class RegistrationComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern("[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}")]],
-      password: ['', [Validators.required, Validators.pattern("(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$")]],
+      password: ['', [Validators.required, Validators.pattern("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$")]],
       passwordConfirm: ['', [Validators.required]]
-      //ToDO: passwordConfirm validator
-    });
+    }, { validator: PasswordValidation.MatchPassword});
   }
 
   // convenience getter for easy access to form fields
