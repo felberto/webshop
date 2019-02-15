@@ -32,7 +32,17 @@
              [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
       <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
         <div *ngIf="f.password.errors.required">Password is required</div>
-        <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+        <div *ngIf="f.password.errors.pattern">Password must contain at least one uppercase, one lowercase, a number or
+          a special character and must be at least 8 characters long
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="passwordConfirm">Password Confirm</label>
+      <input type="password" formControlName="passwordConfirm" class="form-control"
+             [ngClass]="{ 'is-invalid': submitted && f.passwordConfirm.errors }"/>
+      <div *ngIf="submitted && f.passwordConfirm.errors" class="invalid-feedback">
+        <div *ngIf="f.passwordConfirm.errors.required">Password confirm is required</div>
       </div>
     </div>
     <div class="form-group">
