@@ -27,7 +27,7 @@ export class RegistrationComponent implements OnInit {
       email: ['', [Validators.required, Validators.pattern("[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}")]],
       password: ['', [Validators.required, Validators.pattern("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$")]],
       passwordConfirm: ['', [Validators.required]]
-    }, { validator: PasswordValidation.MatchPassword});
+    }, {validator: PasswordValidation.MatchPassword});
   }
 
   // convenience getter for easy access to form fields

@@ -29,6 +29,11 @@ public class CustomerResource {
         return customerService.findOne(id);
     }
 
+    @PostMapping(value = "/customer/authenticate")
+    public Customer login(@RequestBody Customer customer) {
+        return customerService.login(customer);
+    }
+
     @PostMapping("/customer")
     @ResponseStatus(HttpStatus.CREATED)
     public Customer create(@RequestBody Customer customer) {

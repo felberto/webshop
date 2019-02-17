@@ -5,13 +5,14 @@ import {LoginModalService} from "../services/login.modal.service";
 import {LoginModule} from "../login/login.module";
 import {LoginComponent} from "../login/login.component";
 import {RouterModule} from "@angular/router";
+import {NgbDropdownModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
     NavigationComponent
   ],
   exports: [NavigationComponent],
-  imports: [CommonModule, RouterModule, LoginModule],
+  imports: [CommonModule, RouterModule, LoginModule, NgbDropdownModule],
   providers: [LoginModalService],
   entryComponents: [LoginComponent]
 })

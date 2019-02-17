@@ -2,25 +2,38 @@
   <a class="navbar-brand" href="#">Webshop</a>
   <div class="justify-content-end">
     <ul class="nav">
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="currentUser">
         <div (click)="navigate(sell)">
           <img src="../../../assets/icons/sell_white.png"
                style="height: 30px; display: block; margin-left: auto; margin-right: auto;"/>
           <a class="nav-link" style="color: white">Sell</a>
         </div>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="currentUser">
         <div onclick="navigate(cart)">
           <img src="../../../assets/icons/cart_white.png"
                style="height: 30px; display: block; margin-left: auto; margin-right: auto;"/>
           <a class="nav-link" style="color: white">Shopping Cart</a>
         </div>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="!currentUser">
         <div (click)="openModal()">
           <img src="../../../assets/icons/user_white.png"
                style="height: 30px; display: block; margin-left: auto; margin-right: auto;"/>
           <a class="nav-link" style="color: white">Sign In</a>
+        </div>
+      </li>
+      <li class="nav-item" *ngIf="currentUser">
+        <div ngbDropdown class="d-inline-block">
+          <div id="dropdownBasic1" ngbDropdownToggle>
+            <img src="../../../assets/icons/user_white.png"
+                 style="height: 30px; display: block; margin-left: auto; margin-right: auto;"/>
+            <a class="nav-link" style="color: white">{{currentUser.email}}</a>
+          </div>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button class="dropdown-item" routerLink="profile">Profile</button>
+            <button class="dropdown-item" (click)="logout()">Logout</button>
+          </div>
         </div>
       </li>
     </ul>
