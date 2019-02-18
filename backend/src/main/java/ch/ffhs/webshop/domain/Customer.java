@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 public class Customer {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
     private String email;

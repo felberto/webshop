@@ -1,17 +1,17 @@
 import {NgModule} from "@angular/core";
-import {RegistrationComponent} from "./registration.component";
-import {CustomerService} from "../services/customer.service";
 import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {ProfileComponent} from "./profile.component";
+import {AuthenticationService} from "../services/authentication.service";
 
 @NgModule({
   declarations: [
-    RegistrationComponent
+    ProfileComponent
   ],
-  exports: [RegistrationComponent],
+  exports: [ProfileComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule, ReactiveFormsModule],
-  providers: [CustomerService]
+  providers: [AuthenticationService]
 })
-export class RegistrationModule {
+export class ProfileModule {
 }
