@@ -28,6 +28,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/**").permitAll();
     }
 
+    /**
+     *
+     * @return CorsConfigurationSource
+     */
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         final CorsConfiguration configuration = new CorsConfiguration();

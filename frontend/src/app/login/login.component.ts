@@ -35,13 +35,19 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.loginForm.value)
       .subscribe(data => {
-          this.toastr.success("Customer successfully logged in", "", {
-            positionClass: "toast-bottom-right"
-          });
-          this.activeModal.close('login');
-          this.router.navigate(['profile']);
+          if (data != null) {
+            this.toastr.success("Login successful", "", {
+              positionClass: "toast-bottom-right"
+            });
+            this.activeModal.close('login');
+            this.router.navigate(['profile']);
+          } else {
+            this.toastr.error("Login failed", "", {
+              positionClass: "toast-bottom-right"
+            });
+          }
         }, err => {
-          this.toastr.error("Customer login failed", "", {
+          this.toastr.error("Login failed", "", {
             positionClass: "toast-bottom-right"
           });
         }

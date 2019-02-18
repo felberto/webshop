@@ -49,13 +49,13 @@ export class RegistrationComponent implements OnInit {
       .subscribe(
         data => {
 
-          this.toastr.success("Customer successfully registered", "", {
+          this.toastr.success("Registration successful", "", {
             positionClass: "toast-bottom-right"
           });
           this.router.navigate(['/']);
         },
         error => {
-          this.toastr.error("Customer registration failed", "", {
+          this.toastr.error("Registration failed", "", {
             positionClass: "toast-bottom-right"
           });
           this.loading = false;

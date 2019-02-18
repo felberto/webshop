@@ -29,7 +29,7 @@ export class NavigationComponent {
 
   logout(){
     this.authService.logout();
-    this.toastr.success("Customer successfully logged out", "", {
+    this.toastr.success("Logout successful", "", {
       positionClass: "toast-bottom-right"
     });
     this.router.navigate(['']);
