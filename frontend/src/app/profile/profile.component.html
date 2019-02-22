@@ -3,40 +3,43 @@
   <hr>
   <div class="row">
     <!-- left column -->
-    <div class="col-md-3">
+    <div class="col-md-4">
       <div class="text-center">
         <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
         <h6>Upload a different photo...</h6>
         <input type="file" class="form-control">
       </div>
     </div>
-    <!-- edit form column -->
-    <div class="col-md-9" > <!-- *ngIf="currentUser" -->
-      <form class="form-horizontal" role="form">
+    <!-- form column -->
+    <div class="col-md-8">
+      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label class="col-lg-3 control-label">First name:</label>
-          <div class="col-lg-8">
-            <input class="form-control" type="text" value={{currentUser.firstName}} >
+          <label>First name:</label>
+          <input formControlName="firstName" class="form-control" type="text"
+                 [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
+          <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+            <div *ngIf="f.firstName.errors.required">Firstname is required</div>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-lg-3 control-label">Last name:</label>
-          <div class="col-lg-8">
-            <input class="form-control" type="text" value={{currentUser.lastName}}>
+          <label>Last name:</label>
+          <input formControlName="lastName" class="form-control" type="text"
+                 [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
+          <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+            <div *ngIf="f.lastName.errors.required">Lastname is required</div>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-lg-3 control-label">Email:</label>
-          <div class="col-lg-8">
-            <input class="form-control" type="text" value={{currentUser.email}}>
+          <label>Email:</label>
+          <input formControlName="email" class="form-control" type="text"
+                 [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+            <div *ngIf="f.email.errors.pattern">Email is not valid</div>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-lg-5 control-label"></label>
-          <div class="col-lg-8">
-            <input type="button" class="btn btn-primary" value="Save Changes">
-            <input type="reset" class="btn btn-default" value="Cancel">
-          </div>
+          <button [disabled]="!profileForm.dirty" class="btn btn-primary">Save Changes</button>
         </div>
       </form>
     </div>

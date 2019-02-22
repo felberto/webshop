@@ -14,4 +14,9 @@ export class CustomerService {
     return this.http.post<Customer>(SERVER_API_URL + '/customer', customer, {observe: 'response'});
   }
 
+  //Todo: not working
+  update(customer: Customer): Observable<HttpResponse<Customer>> {
+    return this.http.put<Customer>(SERVER_API_URL + '/customer/' + customer.id, customer, {observe: 'response'});
+  }
+
 }
