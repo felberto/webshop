@@ -10,6 +10,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import {ProfileModule} from "./profile/profile.module";
 import {AuthGuard} from "./shared/guards/auth.guard";
+import {SellModule} from "./sell/sell.module";
+import {SellCreateComponent} from "./sell/sell-create.component";
 
 @NgModule({
   declarations: [
@@ -23,7 +25,11 @@ import {AuthGuard} from "./shared/guards/auth.guard";
     ToastrModule.forRoot(),
     LayoutModule,
     RegistrationModule,
-    ProfileModule
+    ProfileModule,
+    SellModule
+  ],
+  entryComponents: [
+    SellCreateComponent
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
             this.toastr.success("Login successful", "", {
               positionClass: "toast-bottom-right"
             });
-            this.activeModal.close('login');
+            this.activeModal.dismiss();
             this.router.navigate(['profile']);
           } else {
             this.toastr.error("Login failed", "", {
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
   }
 
   register() {
-    this.activeModal.close('register');
+    this.activeModal.dismiss();
     this.router.navigate(['register']);
   }
 }

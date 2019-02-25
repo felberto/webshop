@@ -4,6 +4,7 @@ import {AppComponent} from "./app.component";
 import {RegistrationComponent} from "./registration/registration.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {AuthGuard} from "./shared/guards/auth.guard";
+import {SellComponent} from "./sell/sell.component";
 
 const routes: Routes = [
   {
@@ -17,6 +18,11 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'sell',
+    component: SellComponent,
     canActivate: [AuthGuard]
   },
   {

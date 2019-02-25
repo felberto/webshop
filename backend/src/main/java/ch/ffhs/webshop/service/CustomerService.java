@@ -1,8 +1,12 @@
 package ch.ffhs.webshop.service;
 
 import ch.ffhs.webshop.domain.Customer;
+import ch.ffhs.webshop.domain.dto.CustomerAuthDto;
+import ch.ffhs.webshop.domain.dto.CustomerLoginDto;
+import ch.ffhs.webshop.domain.dto.DtoEntity;
 import ch.ffhs.webshop.exception.CustomerNotFoundException;
 import ch.ffhs.webshop.repository.CustomerRepository;
+import ch.ffhs.webshop.util.DtoUtils;
 import ch.ffhs.webshop.util.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,10 +45,10 @@ public class CustomerService {
         return customer.get();
     }
 
-    public Customer login(Customer customer) {
+    public DtoEntity login(CustomerLoginDto customer) {
         Customer customer1 = customerRepository.findCustomerByEmail(customer.getEmail());
         if (passwordEncoder.passwordEncoder().matches(customer.getPassword(), customer1.getPassword())) {
-            return customer1;
+            return new DtoUtils().convertToDto(customer1, new CustomerAuthDto());
         } else {
             return null;
         }
