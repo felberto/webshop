@@ -13,13 +13,15 @@ import java.util.Arrays;
 import java.util.Collections;
 
 /**
- *
  * @author Tobias Felber
  * @author Melanie Ockenfels
  */
 @EnableWebSecurity
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    public SecurityConfiguration() {
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -29,7 +31,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     *
      * @return CorsConfigurationSource
      */
     @Bean

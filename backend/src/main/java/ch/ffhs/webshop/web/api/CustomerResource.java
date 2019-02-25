@@ -1,6 +1,8 @@
 package ch.ffhs.webshop.web.api;
 
 import ch.ffhs.webshop.domain.Customer;
+import ch.ffhs.webshop.domain.dto.CustomerLoginDto;
+import ch.ffhs.webshop.domain.dto.DtoEntity;
 import ch.ffhs.webshop.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,8 +32,8 @@ public class CustomerResource {
     }
 
     @PostMapping(value = "/customer/authenticate")
-    public Customer login(@RequestBody Customer customer) {
-        return customerService.login(customer);
+    public DtoEntity login(@RequestBody CustomerLoginDto customerLoginDto) {
+        return customerService.login(customerLoginDto);
     }
 
     @PostMapping("/customer")
@@ -39,7 +41,6 @@ public class CustomerResource {
     public Customer create(@RequestBody Customer customer) {
         return customerService.save(customer);
     }
-
 
     @PutMapping(value = "/customer/{id}")
     @ResponseStatus(HttpStatus.OK)

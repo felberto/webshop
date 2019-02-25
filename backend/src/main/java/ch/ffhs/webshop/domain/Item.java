@@ -21,21 +21,24 @@ public class Item {
     private String description;
     @NotNull
     private BigDecimal price;
-    private String foto;// to be defined
+    private String foto;
     @NotNull
-    private Long seller_id;
+    @ManyToOne
+    @JoinColumn(name = "seller_id", nullable = false)
+    private Customer seller;
     private Long buyer_id;
     private Timestamp sold;
 
-    public Item(){}
+    public Item() {
+    }
 
     public Item(String title, String description, BigDecimal price,
-                String foto, Long seller_id, Long buyer_id, Timestamp sold){
+                String foto, Customer seller, Long buyer_id, Timestamp sold) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.foto = foto;
-        this.seller_id = seller_id;
+        this.seller = seller;
         this.buyer_id = buyer_id;
         this.sold = sold;
     }

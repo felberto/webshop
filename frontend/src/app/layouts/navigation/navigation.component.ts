@@ -15,7 +15,6 @@ export class NavigationComponent {
 
   constructor(private toastr: ToastrService, private loginModalService: LoginModalService, private authService: AuthenticationService, private router: Router) {
     this.authService.currentUser.subscribe(x => this.currentUser = x);
-
   }
 
   openModal() {
@@ -23,11 +22,10 @@ export class NavigationComponent {
   }
 
   navigate(link: string) {
-    //ToDo: fix
-    this.router.navigateByUrl('/' + link);
+    this.router.navigate([link]);
   }
 
-  logout(){
+  logout() {
     this.authService.logout();
     this.toastr.success("Logout successful", "", {
       positionClass: "toast-bottom-right"
