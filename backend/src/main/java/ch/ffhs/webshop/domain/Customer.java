@@ -5,6 +5,10 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+/**
+ * @author Tobias Felber
+ * @author Melanie Ockenfels
+ */
 @Entity
 @Data
 @Table(name = "customer")
@@ -25,6 +29,14 @@ public class Customer {
     public Customer() {
     }
 
+    /**
+     * Default constructor for customer
+     *
+     * @param email
+     * @param firstName
+     * @param lastName
+     * @param password
+     */
     public Customer(String email, String firstName, String lastName, String password) {
         this.email = email;
         this.firstName = firstName;
