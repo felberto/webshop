@@ -3,6 +3,7 @@ package ch.ffhs.webshop.service;
 import ch.ffhs.webshop.domain.Customer;
 import ch.ffhs.webshop.domain.dto.CustomerAuthDto;
 import ch.ffhs.webshop.domain.dto.CustomerLoginDto;
+import ch.ffhs.webshop.domain.dto.CustomerProfileDto;
 import ch.ffhs.webshop.domain.dto.DtoEntity;
 import ch.ffhs.webshop.exception.CustomerNotFoundException;
 import ch.ffhs.webshop.repository.CustomerRepository;
@@ -43,6 +44,11 @@ public class CustomerService {
             throw new CustomerNotFoundException("id-" + id);
 
         return customer.get();
+    }
+
+    public DtoEntity findCustomerById(Long id) {
+        Customer customer = customerRepository.findCustomerById(id);
+        return new DtoUtils().convertToDto(customer, new CustomerProfileDto());
     }
 
     public DtoEntity login(CustomerLoginDto customer) {

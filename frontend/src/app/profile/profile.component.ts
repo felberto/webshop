@@ -22,10 +22,13 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(){
+    this.customerService.getProfile(this.currentUser.id).subscribe(res => {
+      this.currentUser = res.body;
+    });
     this.profileForm = this.formBuilder.group({
-      firstName: [this.currentUser.firstName, Validators.required],
-      lastName: [this.currentUser.lastName, Validators.required],
-      email: [this.currentUser.email, [Validators.required, Validators.pattern("[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}")]]
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.pattern("[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}")]]
     });
   }
 
@@ -46,12 +49,12 @@ export class ProfileComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.toastr.success("Registration successful", "", {
+          this.toastr.success("Data update successful", "", {
             positionClass: "toast-bottom-right"
           });
         },
         error => {
-          this.toastr.error("Registration failed", "", {
+          this.toastr.error("Data update failed", "", {
             positionClass: "toast-bottom-right"
           });
         });

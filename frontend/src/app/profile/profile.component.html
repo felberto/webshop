@@ -11,11 +11,11 @@
       </div>
     </div>
     <!-- form column -->
-    <div class="col-md-8">
+    <div class="col-md-8" *ngIf="currentUser">
       <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
+        <div class="form-group" >
           <label>First name:</label>
-          <input formControlName="firstName" class="form-control" type="text"
+          <input formControlName="firstName" class="form-control" type="text" value="{{currentUser.firstName}}"
                  [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
           <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
             <div *ngIf="f.firstName.errors.required">Firstname is required</div>
@@ -23,7 +23,7 @@
         </div>
         <div class="form-group">
           <label>Last name:</label>
-          <input formControlName="lastName" class="form-control" type="text"
+          <input formControlName="lastName" class="form-control" type="text" value="{{currentUser.lastName}}"
                  [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
           <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
             <div *ngIf="f.lastName.errors.required">Lastname is required</div>
@@ -31,7 +31,7 @@
         </div>
         <div class="form-group">
           <label>Email:</label>
-          <input formControlName="email" class="form-control" type="text"
+          <input formControlName="email" class="form-control" type="text" value="{{currentUser.email}}"
                  [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
           <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
             <div *ngIf="f.email.errors.required">Email is required</div>

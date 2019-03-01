@@ -19,4 +19,7 @@ export class CustomerService {
     return this.http.put<Customer>(SERVER_API_URL + '/customer/' + customer.id, customer, {observe: 'response'});
   }
 
+  getProfile(id: number): Observable<HttpResponse<Customer>>{
+    return this.http.get<Customer>(SERVER_API_URL + `/customer/${id}`, {observe: 'response'});
+  }
 }

@@ -27,8 +27,8 @@ public class CustomerResource {
     }
 
     @GetMapping(value = "/customer/{id}")
-    public Customer findOne(@PathVariable("id") Long id) {
-        return customerService.findOne(id);
+    public DtoEntity findOne(@PathVariable("id") Long id) {
+        return customerService.findCustomerById(id);
     }
 
     @PostMapping(value = "/customer/authenticate")
