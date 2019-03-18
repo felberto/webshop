@@ -2,6 +2,7 @@ package ch.ffhs.webshop.web.api;
 
 import ch.ffhs.webshop.domain.Customer;
 import ch.ffhs.webshop.domain.dto.CustomerLoginDto;
+import ch.ffhs.webshop.domain.dto.CustomerProfileDto;
 import ch.ffhs.webshop.domain.dto.DtoEntity;
 import ch.ffhs.webshop.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,8 @@ public class CustomerResource {
     }
 
     @GetMapping(value = "/customer/{id}")
-    public DtoEntity findOne(@PathVariable("id") Long id) {
-        return customerService.findCustomerById(id);
+    public Customer findOne(@PathVariable("id") Long id) {
+        return customerService.findOne(id);
     }
 
     @PostMapping(value = "/customer/authenticate")
@@ -44,9 +45,8 @@ public class CustomerResource {
 
     @PutMapping(value = "/customer/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable("id") Long id, @RequestBody Customer customer) {
-        customerService.findOne(customer.getId());
-        customerService.update(customer);
+    public void update(@PathVariable("id") Long id, @RequestBody CustomerProfileDto customerProfileDto) {
+        customerService.update(id, customerProfileDto);
     }
 
     @DeleteMapping(value = "/customer/{id}")

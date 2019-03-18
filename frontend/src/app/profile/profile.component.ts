@@ -44,8 +44,7 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
-    // Todo:
-    this.customerService.update(this.profileForm.value)
+    this.customerService.update(this.currentUser.id, this.profileForm.value)
       .pipe(first())
       .subscribe(
         data => {

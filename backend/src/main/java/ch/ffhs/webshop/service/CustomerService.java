@@ -46,11 +46,6 @@ public class CustomerService {
         return customer.get();
     }
 
-    public DtoEntity findCustomerById(Long id) {
-        Customer customer = customerRepository.findCustomerById(id);
-        return new DtoUtils().convertToDto(customer, new CustomerProfileDto());
-    }
-
     public DtoEntity login(CustomerLoginDto customer) {
         Customer customer1 = customerRepository.findCustomerByEmail(customer.getEmail());
         if (passwordEncoder.passwordEncoder().matches(customer.getPassword(), customer1.getPassword())) {
@@ -66,11 +61,25 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-    public void update(Customer customer) {
-        customerRepository.save(customer);
+    public void update(Long id, CustomerProfileDto customerProfileDto) {
+        Customer customer = findOne(id);
+        customerRepository.save(updateCustomerValues(customerProfileDto, customer));
     }
 
     public void deleteById(Long id) {
         customerRepository.delete(findOne(id));
+    }
+
+    private Customer updateCustomerValues(CustomerProfileDto profileDtoCustomer, Customer originalCustomer){
+        if (!originalCustomer.getFirstName().equals(profileDtoCustomer.getFirstName())){
+            originalCustomer.setFirstName(profileDtoCustomer.getFirstName());
+        }
+        else if (!originalCustomer.getLastName().equals(profileDtoCustomer.getLastName())){
+            originalCustomer.setLastName(profileDtoCustomer.getLastName());
+        }
+        else if (!originalCustomer.getEmail().equals(profileDtoCustomer.getEmail())){
+            originalCustomer.setEmail(profileDtoCustomer.getEmail());
+        }
+        return originalCustomer;
     }
 }
