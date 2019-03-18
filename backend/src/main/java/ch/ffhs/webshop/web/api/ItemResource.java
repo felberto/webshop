@@ -1,7 +1,7 @@
 package ch.ffhs.webshop.web.api;
 
 import ch.ffhs.webshop.domain.Item;
-import ch.ffhs.webshop.domain.dto.CustomerAuthDto;
+import ch.ffhs.webshop.domain.dto.CreateItemDto;
 import ch.ffhs.webshop.domain.dto.DtoEntity;
 import ch.ffhs.webshop.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +33,8 @@ public class ItemResource {
 
     @PostMapping("/item")
     @ResponseStatus(HttpStatus.CREATED)
-    public Item create(@RequestBody Item item) {
-        return itemService.save(item);
+    public DtoEntity create(@RequestBody CreateItemDto itemDto) {
+        return itemService.save(itemDto);
     }
 
 }

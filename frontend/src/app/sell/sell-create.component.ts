@@ -7,6 +7,7 @@ import {ToastrService} from "ngx-toastr";
 import {Item} from "../models/item";
 import {AuthenticationService} from "../services/authentication.service";
 import {Customer} from "../models/customer";
+import {CreateItemDto} from "../models/dto/create-item.dto";
 
 @Component({
   selector: 'sell-create',
@@ -15,7 +16,7 @@ import {Customer} from "../models/customer";
 export class SellCreateComponent implements OnInit {
 
   createItem: FormGroup;
-  item: Item = new Item();
+  item: CreateItemDto = new CreateItemDto();
   currentUser: Customer;
 
   constructor(private authService: AuthenticationService, public activeModal: NgbActiveModal, private formBuilder: FormBuilder, private router: Router, private itemService: ItemService, private toastr: ToastrService) {

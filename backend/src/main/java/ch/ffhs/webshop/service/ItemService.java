@@ -1,10 +1,12 @@
 package ch.ffhs.webshop.service;
 
 import ch.ffhs.webshop.domain.Item;
+import ch.ffhs.webshop.domain.dto.CreateItemDto;
 import ch.ffhs.webshop.domain.dto.DtoEntity;
 import ch.ffhs.webshop.domain.dto.ItemDto;
 import ch.ffhs.webshop.repository.ItemRepository;
 import ch.ffhs.webshop.util.DtoUtils;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +41,9 @@ public class ItemService {
                 .collect(Collectors.toList());
     }
 
-    public Item save(Item item) {
-        return itemRepository.save(item);
+    public DtoEntity save(CreateItemDto itemDto) {
+        Item item = (Item) new DtoUtils().convertToEntity(new Item(), itemDto);
+        Item returnItem = itemRepository.save(item);
+        return new DtoUtils().convertToDto(returnItem, new ItemDto());
     }
 }
