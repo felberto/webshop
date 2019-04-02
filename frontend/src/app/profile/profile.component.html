@@ -11,35 +11,38 @@
       </div>
     </div>
     <!-- form column -->
-    <div class="col-md-8" *ngIf="currentUser">
-      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-        <div class="form-group" >
-          <label>First name:</label>
-          <input formControlName="firstName" class="form-control" type="text" value="{{currentUser.firstName}}"
-                 [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
-          <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-            <div *ngIf="f.firstName.errors.required">Firstname is required</div>
+    <div class="col-md-8">
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="firstName">First name:</label>
+          <input class="form-control" type="text" id="firstName" name="firstName" required
+                 [(ngModel)]="currentUser.firstName" [value]="currentUser.firstName"
+                 #firstName="ngModel" [ngClass]="{'is-invalid': firstName.dirty && firstName.errors}">
+          <div *ngIf=" firstName.dirty && firstName.errors" class="invalid-feedback">
+            <div *ngIf="firstName.errors.required">First name is required</div>
           </div>
         </div>
         <div class="form-group">
-          <label>Last name:</label>
-          <input formControlName="lastName" class="form-control" type="text" value="{{currentUser.lastName}}"
-                 [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
-          <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-            <div *ngIf="f.lastName.errors.required">Lastname is required</div>
+          <label for="lastName">Last name:</label>
+          <input class="form-control" type="text" id="lastName" name="lastName" required
+                 [(ngModel)]="currentUser.lastName" [value]="currentUser.lastName"
+                 #lastName="ngModel" [ngClass]="{'is-invalid': lastName.dirty && lastName.errors}">
+          <div *ngIf="lastName.dirty && lastName.errors" class="invalid-feedback">
+            <div *ngIf="lastName.errors.required">Last name is required</div>
           </div>
         </div>
         <div class="form-group">
-          <label>Email:</label>
-          <input formControlName="email" class="form-control" type="text" value="{{currentUser.email}}"
-                 [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
-          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-            <div *ngIf="f.email.errors.required">Email is required</div>
-            <div *ngIf="f.email.errors.pattern">Email is not valid</div>
+          <label for="email">Email:</label>
+          <input class="form-control" type="text" id="email" name="email" required validateEmail
+                 [(ngModel)]="currentUser.email" [value]="currentUser.email"
+                 #email="ngModel" [ngClass]="{'is-invalid': email.errors && email.dirty}">
+          <div *ngIf="email.errors && email.dirty" class="invalid-feedback">
+            <div *ngIf="email.errors.required">Email is required</div>
+            <div *ngIf="email.errors.emailvalidator">Email is not valid</div>
           </div>
         </div>
         <div class="form-group">
-          <button [disabled]="!profileForm.dirty" class="btn btn-primary">Save Changes</button>
+          <button [disabled]="!(firstName.dirty || lastName.dirty || email.dirty)" class="btn btn-primary">Save Changes</button>
         </div>
       </form>
     </div>
