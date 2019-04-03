@@ -12,7 +12,7 @@
     </div>
     <!-- form column -->
     <div class="col-md-8">
-      <form (ngSubmit)="onSubmit()" #profileForm="ngForm">
+      <form (ngSubmit)="onSubmit(profileForm)" #profileForm="ngForm">
         <div class="form-group">
           <label for="firstName">First name:</label>
           <input class="form-control" type="text" id="firstName" name="firstName" required

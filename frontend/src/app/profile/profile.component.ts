@@ -4,6 +4,7 @@ import {AuthenticationService} from "../services/authentication.service";
 import {first} from "rxjs/operators";
 import {CustomerService} from "../services/customer.service";
 import {ToastrService} from "ngx-toastr";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'profile',
@@ -24,7 +25,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  onSubmit(){
+  onSubmit(form: NgForm){
     this.customerService.update(this.currentUser)
       .pipe(first())
       .subscribe(
@@ -32,11 +33,19 @@ export class ProfileComponent implements OnInit {
           this.toastr.success("Data update successful", "", {
             positionClass: "toast-bottom-right"
           });
+          this.markFormAsPristine(form);
         },
         error => {
           this.toastr.error("Data update failed", "", {
             positionClass: "toast-bottom-right"
           });
         });
+  }
+
+  private markFormAsPristine(form: NgForm) {
+    Object.keys(form.controls)
+      .forEach(fieldName =>
+        form.controls[fieldName].markAsPristine()
+      );
   }
 }
