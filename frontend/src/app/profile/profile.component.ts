@@ -25,12 +25,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit(){
-    // stop here if form is invalid
-    // if (this.profileForm.invalid) {
-    //   return;
-    // }
-    // Todo: update function
-    this.customerService.update(this.currentUser.id, this.currentUser)
+    this.customerService.update(this.currentUser)
       .pipe(first())
       .subscribe(
         data => {

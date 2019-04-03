@@ -15,8 +15,8 @@ export class CustomerService {
     return this.http.post<Customer>(SERVER_API_URL + '/customer', customer, {observe: 'response'});
   }
 
-  update(id: number, profileDto: CustomerProfileDto): Observable<HttpResponse<Customer>> {
-    return this.http.put<Customer>(SERVER_API_URL + `/customer/${id}`, profileDto, {observe: 'response'});
+  update(profileDto: CustomerProfileDto): Observable<HttpResponse<Customer>> {
+    return this.http.put<Customer>(SERVER_API_URL + `/customer/${profileDto.id}`, profileDto, {observe: 'response'});
   }
 
   getProfile(id: number): Observable<HttpResponse<Customer>>{
