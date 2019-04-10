@@ -7,7 +7,8 @@ import {Item} from "../models/item";
 
 @Component({
   selector: 'sell',
-  templateUrl: './sell.component.html'
+  templateUrl: './sell.component.html',
+  styleUrls: ['./sell.component.css']
 })
 export class SellComponent implements OnInit {
 
