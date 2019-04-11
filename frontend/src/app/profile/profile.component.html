@@ -45,6 +45,9 @@
           <button [disabled]="!(profileForm.dirty && profileForm.valid)" class="btn btn-primary">Save Changes</button>
         </div>
       </form>
+      <button type="button" class="btn btn-outline-danger" (click)="deleteProfile()">
+        Delete Profile
+      </button>
     </div>
   </div>
   <hr>

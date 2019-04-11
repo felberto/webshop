@@ -5,15 +5,19 @@ import {HttpClientModule} from "@angular/common/http";
 import {ProfileComponent} from "./profile.component";
 import {AuthenticationService} from "../services/authentication.service";
 import {EmailValidator} from "../shared/validators/EmailValidator";
+import {DeleteProfileComponent} from "./delete.profile.component";
+import {DeleteProfileService} from "../services/delete.profile.modal.service";
 
 @NgModule({
   declarations: [
     ProfileComponent,
-    EmailValidator
+    EmailValidator,
+    DeleteProfileComponent
   ],
   exports: [ProfileComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule, ReactiveFormsModule],
-  providers: [AuthenticationService]
+  providers: [AuthenticationService, DeleteProfileService],
+  entryComponents: [DeleteProfileComponent]
 })
 export class ProfileModule {
 }
