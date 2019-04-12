@@ -19,6 +19,10 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
+  public set currentUserValue(customer: Customer) {
+    this.currentUserSubject.next(customer);
+  }
+
   login(customer: Customer): Observable<HttpResponse<Customer>> {
     return this.http.post<any>(SERVER_API_URL + '/customer/authenticate', customer)
       .pipe(map(customer => {

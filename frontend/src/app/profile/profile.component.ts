@@ -35,6 +35,8 @@ export class ProfileComponent implements OnInit {
             positionClass: "toast-bottom-right"
           });
           this.markFormAsPristine(form);
+          localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+          this.authService.currentUserValue = this.currentUser;
         },
         error => {
           this.toastr.error("Data update failed", "", {
