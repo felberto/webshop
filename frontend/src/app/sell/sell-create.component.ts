@@ -48,7 +48,7 @@ export class SellCreateComponent implements OnInit {
             this.toastr.success("Save successful", "", {
               positionClass: "toast-bottom-right"
             });
-            this.activeModal.dismiss();
+            this.activeModal.close(this.item);
             this.router.navigate(['sell']);
           } else {
             this.toastr.error("Save failed", "", {

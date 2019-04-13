@@ -26,7 +26,12 @@ export class SellComponent implements OnInit {
   }
 
   openModal() {
-    this.sellCreateModalService.open();
+    this.sellCreateModalService.open().result.then((data) => {
+      this.refreshData(data);
+    });
   }
 
+  refreshData(data: any) {
+    this.items.push(data);
+  }
 }
