@@ -10,6 +10,6 @@ public class CreateItemDto implements DtoEntity {
     private String title;
     private String description;
     private BigDecimal price;
-    private String foto;
+    private String image;
     private CustomerAuthDto seller;
 }

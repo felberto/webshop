@@ -11,7 +11,7 @@ public class ItemDto implements DtoEntity {
     private String title;
     private String description;
     private BigDecimal price;
-    private String foto;
+    private String image;
     private CustomerAuthDto seller;
     private CustomerAuthDto buyer;
     private Timestamp sold;

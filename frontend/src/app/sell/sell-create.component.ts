@@ -4,14 +4,14 @@ import {Router} from "@angular/router";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {ItemService} from "../services/item.service";
 import {ToastrService} from "ngx-toastr";
-import {Item} from "../models/item";
 import {AuthenticationService} from "../services/authentication.service";
 import {Customer} from "../models/customer";
 import {CreateItemDto} from "../models/dto/create-item.dto";
 
 @Component({
   selector: 'sell-create',
-  templateUrl: './sell-create.component.html'
+  templateUrl: './sell-create.component.html',
+  styleUrls: ['./sell-create.component.css']
 })
 export class SellCreateComponent implements OnInit {
 
@@ -26,6 +26,18 @@ export class SellCreateComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() {
     return this.createItem.controls;
+  }
+
+  processFile(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', (event: any) => {
+
+      this.item.image = btoa(event.target.result);
+    });
+
+    reader.readAsDataURL(file);
   }
 
   ngOnInit() {

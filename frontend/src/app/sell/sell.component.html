@@ -4,7 +4,12 @@
   <br/>
   <div class="grid">
     <div class="card" *ngFor="let item of items">
-      <img class="card-img-top" src="../../assets/images/placeholder.png" alt="Card image cap">
+      <div *ngIf="item.image == null">
+        <img class="card-img-top" src="../../assets/images/placeholder.png" alt="default item image">
+      </div>
+      <div *ngIf="item.image != null">
+        <img class="card-img-top" [src]="getImageSrc(item)" alt="item image">
+      </div>
       <div class="card-body">
         <h5 class="card-title">{{item.title}}</h5>
         <p class="card-text">{{item.description}}</p>
