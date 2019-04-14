@@ -25,6 +25,7 @@ public class Customer {
     @Column(name = "lastname")
     private String lastName;
     private String password;
+    private boolean active;
 
     public Customer() {
     }

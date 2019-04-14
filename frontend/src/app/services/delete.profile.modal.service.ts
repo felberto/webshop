@@ -7,8 +7,6 @@ export class DeleteProfileService {
   private isOpen = false;
   constructor(private modalService: NgbModal) {}
 
-  // todo delete profile, based on id
-
   open(): NgbModalRef {
     if (this.isOpen) {
       return;

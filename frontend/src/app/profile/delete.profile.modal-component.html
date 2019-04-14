@@ -5,8 +5,9 @@
   </button>
 </div>
 <div class="modal-body">
-  <p>Do you really wanna delete your profile? This cannot be undone.</p>
+  <p>Please confirm the deletion of your profile! This cannot be undone.</p>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-danger" (click)="activeModal.close('Save click')">Yes, delete it!</button>
+  <button type="button" class="btn btn-outline-secondary" (click)="activeModal.dismiss('dismiss')">Cancel</button>
+  <button type="button" class="btn btn-danger" (click)="deactivateProfile()">Yes, delete it!</button>
 </div>

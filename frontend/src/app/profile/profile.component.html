@@ -1,16 +1,8 @@
 <div class="container mt-5">
-  <h1>Profile Settings</h1>
+  <h3>Profile Settings</h3>
   <hr>
   <div class="row">
     <!-- left column -->
-    <div class="col-md-4">
-      <div class="text-center">
-        <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
-        <h6>Upload a different photo...</h6>
-        <input type="file" class="form-control">
-      </div>
-    </div>
-    <!-- form column -->
     <div class="col-md-8">
       <form (ngSubmit)="onSubmit(profileForm)" #profileForm="ngForm">
         <div class="form-group">
@@ -45,10 +37,23 @@
           <button [disabled]="!(profileForm.dirty && profileForm.valid)" class="btn btn-primary">Save Changes</button>
         </div>
       </form>
-      <button type="button" class="btn btn-outline-danger" (click)="deleteProfile()">
-        Delete Profile
-      </button>
+    </div>
+    <!-- right column -->
+    <div class="col-md-4">
+      <div class="text-center">
+        <img src="//placehold.it/150" class="md-avatar rounded" alt="avatar">
+      </div>
+      <div class="text-center mt-2">
+        <label class="btn btn-secondary">
+          Browse <input type="file" style="display: none;">
+        </label>
+      </div>
     </div>
   </div>
+  <h3 class="mt-4">Delete Profile</h3>
   <hr>
+  <p>Here you can delete your profile. This action can not be undone.</p>
+  <button type="button" class="btn btn-outline-danger" (click)="deleteProfile()">
+    Delete Profile
+  </button>
 </div>

@@ -1,20 +1,18 @@
-drop table if exists customer;
 drop table if exists item;
+drop table if exists customer;
 
 create table customer (
   id serial primary key,
   email varchar not null unique,
   firstname varchar,
   lastname varchar,
-  password varchar not null
+  password varchar not null,
+  active boolean DEFAULT true
 );
 
 alter table customer
   owner to webshop;
 
--- create unique index customer_index
-  -- on customer (email, password);
-  
 create table item (
   id serial primary key,
   title varchar not null,
@@ -28,5 +26,3 @@ create table item (
 
 alter table item
   owner to webshop;
-  
-  

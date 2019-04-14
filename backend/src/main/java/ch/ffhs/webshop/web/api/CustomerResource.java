@@ -49,6 +49,12 @@ public class CustomerResource {
         customerService.update(id, customerProfileDto);
     }
 
+    @PutMapping(value = "/customer/deactivated/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deactivateProfile(@PathVariable("id") Long id) {
+        customerService.deactivateProfile(id);
+    }
+
     @DeleteMapping(value = "/customer/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") Long id) {
