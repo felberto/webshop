@@ -21,7 +21,7 @@ public class Item {
     private String description;
     @NotNull
     private BigDecimal price;
-    private String foto;
+    private String image;
     @NotNull
     @ManyToOne
     @JoinColumn(name = "seller_id", nullable = false)
@@ -33,11 +33,11 @@ public class Item {
     }
 
     public Item(String title, String description, BigDecimal price,
-                String foto, Customer seller, Long buyer_id, Timestamp sold) {
+                String image, Customer seller, Long buyer_id, Timestamp sold) {
         this.title = title;
         this.description = description;
         this.price = price;
-        this.foto = foto;
+        this.image = image;
         this.seller = seller;
         this.buyer_id = buyer_id;
         this.sold = sold;
