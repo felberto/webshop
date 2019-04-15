@@ -10,8 +10,7 @@ import {CreateItemDto} from "../models/dto/create-item.dto";
 
 @Component({
   selector: 'sell-create',
-  templateUrl: './sell-create.component.html',
-  styleUrls: ['./sell-create.component.css']
+  templateUrl: './sell-create.component.html'
 })
 export class SellCreateComponent implements OnInit {
 
