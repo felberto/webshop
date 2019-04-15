@@ -3,6 +3,7 @@ import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {SERVER_API_URL} from "../app.constants";
 import {Item} from "../models/item";
+import {CreateItemDto} from "../models/dto/create-item.dto";
 
 @Injectable()
 export class ItemService {
@@ -10,8 +11,8 @@ export class ItemService {
   constructor(private http: HttpClient) {
   }
 
-  save(item: Item): Observable<HttpResponse<Item>> {
-    return this.http.post<Item>(SERVER_API_URL + '/item', item, {observe: 'response'});
+  save(createItemDto: CreateItemDto): Observable<HttpResponse<Item>> {
+    return this.http.post<Item>(SERVER_API_URL + '/item', createItemDto, {observe: 'response'});
   }
 
   getAllByCustomer(id: number): Observable<HttpResponse<Item[]>> {

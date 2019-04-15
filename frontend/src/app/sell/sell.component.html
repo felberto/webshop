@@ -2,16 +2,27 @@
   <button type="button" class="btn btn-secondary btn-lg btn-block" (click)="openModal()">Add new item</button>
   <br/>
   <br/>
-  <div class="card-columns">
-      <div class="card" *ngFor="let item of items">
-        <img class="card-img-top" src="../../assets/images/placeholder.png" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">{{item.title}}</h5>
+  <div class="grid pb-5">
+    <div class="card" *ngFor="let item of items">
+      <div *ngIf="item.image == null">
+        <img class="card-img-top" src="../../assets/images/placeholder.png" alt="default item image">
+      </div>
+      <div *ngIf="item.image != null">
+        <img class="card-img-top" [src]="getImageSrc(item)" alt="item image">
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{item.title}}</h5>
+        <div *ngIf="item.description.length < 41">
           <p class="card-text">{{item.description}}</p>
-          <p class="card-text" *ngIf="item.seller != undefined">
-            <small class="text-muted">{{item.seller.email}}</small>
-          </p>
         </div>
+        <div *ngIf="item.description.length > 40">
+          <p class="card-text">{{item.description | slice:0:40}}...</p>
+        </div>
+        <p class="card-text font-weight-bold float-right">CHF {{item.price}}.-</p>
+        <p class="card-text float-left" *ngIf="item.seller != undefined">
+          <small class="text-muted">{{item.seller.email}}</small>
+        </p>
+      </div>
     </div>
   </div>
 </div>

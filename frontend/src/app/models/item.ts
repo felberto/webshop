@@ -4,6 +4,7 @@ export class Item {
   id: number;
   title: string;
   description: string;
+  image: string;
   price: number;
   seller: Customer;
   buyer_id: number;
