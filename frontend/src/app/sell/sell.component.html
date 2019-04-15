@@ -12,7 +12,12 @@
       </div>
       <div class="card-body">
         <h5 class="card-title">{{item.title}}</h5>
-        <p class="card-text">{{item.description}}</p>
+        <div *ngIf="item.description.length < 41">
+          <p class="card-text">{{item.description}}</p>
+        </div>
+        <div *ngIf="item.description.length > 40">
+          <p class="card-text">{{item.description | slice:0:40}}...</p>
+        </div>
         <p class="card-text font-weight-bold float-right">CHF {{item.price}}.-</p>
         <p class="card-text float-left" *ngIf="item.seller != undefined">
           <small class="text-muted">{{item.seller.email}}</small>
