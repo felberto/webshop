@@ -12,6 +12,8 @@ import {ProfileModule} from "./profile/profile.module";
 import {AuthGuard} from "./shared/guards/auth.guard";
 import {SellModule} from "./sell/sell.module";
 import {SellCreateComponent} from "./sell/sell-create.component";
+import {FormsModule} from "@angular/forms";
+import {SearchModule} from "./search/search.module";
 
 @NgModule({
   declarations: [
@@ -23,10 +25,12 @@ import {SellCreateComponent} from "./sell/sell-create.component";
     NgbModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    FormsModule,
     LayoutModule,
     RegistrationModule,
     ProfileModule,
-    SellModule
+    SellModule,
+    SearchModule
   ],
   entryComponents: [
     SellCreateComponent

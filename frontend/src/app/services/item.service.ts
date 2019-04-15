@@ -19,4 +19,8 @@ export class ItemService {
     return this.http.get<Item[]>(SERVER_API_URL + `/item/customer/${id}`, {observe: 'response'});
   }
 
+  getAllAvailable(): Observable<HttpResponse<Item[]>> {
+    return this.http.get<Item[]>(SERVER_API_URL + '/item/available', {observe: 'response'});
+  }
+
 }
