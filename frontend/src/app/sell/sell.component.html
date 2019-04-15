@@ -13,8 +13,8 @@
       <div class="card-body">
         <h5 class="card-title">{{item.title}}</h5>
         <p class="card-text">{{item.description}}</p>
-        <p class="card-text font-weight-bold">CHF {{item.price}}.-</p>
-        <p class="card-text" *ngIf="item.seller != undefined">
+        <p class="card-text font-weight-bold float-right">CHF {{item.price}}.-</p>
+        <p class="card-text float-left" *ngIf="item.seller != undefined">
           <small class="text-muted">{{item.seller.email}}</small>
         </p>
       </div>
