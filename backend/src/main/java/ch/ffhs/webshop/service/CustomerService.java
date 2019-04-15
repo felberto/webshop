@@ -48,7 +48,10 @@ public class CustomerService {
 
     public DtoEntity login(CustomerLoginDto customer) {
         Customer customer1 = customerRepository.findCustomerByEmail(customer.getEmail());
-        if (passwordEncoder.passwordEncoder().matches(customer.getPassword(), customer1.getPassword())) {
+        if(!customer1.isActive()) {
+            throw new CustomerNotFoundException("id-" + customer1.getId());
+        }
+        else if (passwordEncoder.passwordEncoder().matches(customer.getPassword(), customer1.getPassword())) {
             return new DtoUtils().convertToDto(customer1, new CustomerAuthDto());
         } else {
             return null;
@@ -64,6 +67,12 @@ public class CustomerService {
     public void update(Long id, CustomerProfileDto customerProfileDto) {
         Customer customer = findOne(id);
         customerRepository.save(updateCustomerValues(customerProfileDto, customer));
+    }
+
+    public void deactivateProfile(Long id){
+        Customer customer = findOne(id);
+        customer.setActive(false);
+        customerRepository.save(customer);
     }
 
     public void deleteById(Long id) {

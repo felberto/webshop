@@ -22,4 +22,8 @@ export class CustomerService {
   getProfile(id: number): Observable<HttpResponse<Customer>>{
     return this.http.get<Customer>(SERVER_API_URL + `/customer/${id}`, {observe: 'response'});
   }
+
+  deactivateProfile(id: number): Observable<{}> {
+    return this.http.put(SERVER_API_URL + `/customer/deactivated/${id}`, {observe: 'response'});
+  }
 }

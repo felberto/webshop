@@ -5,6 +5,7 @@ import {first} from "rxjs/operators";
 import {CustomerService} from "../services/customer.service";
 import {ToastrService} from "ngx-toastr";
 import {NgForm} from "@angular/forms";
+import {DeleteProfileService} from "../services/delete.profile.modal.service";
 
 @Component({
   selector: 'profile',
@@ -15,7 +16,7 @@ export class ProfileComponent implements OnInit {
   currentUser: Customer;
 
   constructor(private authService: AuthenticationService, private customerService: CustomerService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService, private deleteProfileService: DeleteProfileService) {
     this.authService.currentUser.subscribe(x => this.currentUser = x);
   }
 
@@ -34,6 +35,8 @@ export class ProfileComponent implements OnInit {
             positionClass: "toast-bottom-right"
           });
           this.markFormAsPristine(form);
+          localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+          this.authService.currentUserValue = this.currentUser;
         },
         error => {
           this.toastr.error("Data update failed", "", {
@@ -47,5 +50,9 @@ export class ProfileComponent implements OnInit {
       .forEach(fieldName =>
         form.controls[fieldName].markAsPristine()
       );
+  }
+
+  deleteProfile(){
+    this.deleteProfileService.open();
   }
 }
