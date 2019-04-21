@@ -6,7 +6,6 @@ import ch.ffhs.webshop.domain.dto.DtoEntity;
 import ch.ffhs.webshop.domain.dto.ItemDto;
 import ch.ffhs.webshop.repository.ItemRepository;
 import ch.ffhs.webshop.util.DtoUtils;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,5 +44,12 @@ public class ItemService {
         Item item = (Item) new DtoUtils().convertToEntity(new Item(), itemDto);
         Item returnItem = itemRepository.save(item);
         return new DtoUtils().convertToDto(returnItem, new ItemDto());
+    }
+
+    public List<DtoEntity> findAllAvailable() {
+        List<Item> list = itemRepository.findAllWhereBuyerIsNull();
+        return list.stream()
+                .map(item -> new DtoUtils().convertToDto(item, new ItemDto()))
+                .collect(Collectors.toList());
     }
 }

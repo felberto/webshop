@@ -1,15 +1,15 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AppComponent} from "./app.component";
 import {RegistrationComponent} from "./registration/registration.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {AuthGuard} from "./shared/guards/auth.guard";
 import {SellComponent} from "./sell/sell.component";
+import {SearchComponent} from "./search/search.component";
 
 const routes: Routes = [
   {
-    path: 'home',
-    component: AppComponent
+    path: '',
+    component: SearchComponent
   },
   {
     path: 'register',

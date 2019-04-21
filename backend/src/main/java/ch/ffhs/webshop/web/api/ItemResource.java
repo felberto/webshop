@@ -31,6 +31,11 @@ public class ItemResource {
         return itemService.findAllByCustomer(id);
     }
 
+    @GetMapping(value = "/item/available")
+    public List<DtoEntity> findAllAvailable() {
+        return itemService.findAllAvailable();
+    }
+
     @PostMapping("/item")
     @ResponseStatus(HttpStatus.CREATED)
     public DtoEntity create(@RequestBody CreateItemDto itemDto) {
