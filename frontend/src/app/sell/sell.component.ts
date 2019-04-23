@@ -38,9 +38,7 @@ export class SellComponent implements OnInit {
       });
     }
     else if (item != null){
-      this.sellEditModalService.open(item).result.then((data) => {
-        this.refreshData(data);
-      });
+      this.sellEditModalService.open(item);
     }
 
   }

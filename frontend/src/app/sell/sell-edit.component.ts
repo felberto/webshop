@@ -10,13 +10,10 @@ import {first} from "rxjs/operators";
   selector: 'sell-edit',
   templateUrl: './sell-edit.component.html'
 })
-export class SellEditComponent implements OnInit {
+export class SellEditComponent {
   @Input() public item;
 
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder, private router: Router, private itemService: ItemService, private toastr: ToastrService) {
-  }
-
-  ngOnInit() {
   }
 
   onSubmit(form: NgForm){

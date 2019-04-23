@@ -45,7 +45,7 @@ public class ItemResource {
 
     @PutMapping(value = "/item/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public DtoEntity update(@PathVariable("id") Long id, @RequestBody EditItemDto editItemDto) {
-        return itemService.update(id, editItemDto);
+    public void update(@PathVariable("id") Long id, @RequestBody EditItemDto editItemDto) {
+        itemService.update(id, editItemDto);
     }
 }

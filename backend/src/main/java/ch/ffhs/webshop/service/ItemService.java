@@ -65,10 +65,9 @@ public class ItemService {
                 .collect(Collectors.toList());
     }
 
-    public DtoEntity update(Long id, EditItemDto editItemDto) {
+    public void update(Long id, EditItemDto editItemDto) {
         Item item = findOne(id);
-        Item updatedItem = itemRepository.save(updateItemValues(editItemDto, item));
-        return new DtoUtils().convertToDto(updatedItem, new ItemDto());
+        itemRepository.save(updateItemValues(editItemDto, item));
     }
 
     private Item updateItemValues(EditItemDto editItemDto, Item originalItem){
