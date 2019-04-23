@@ -3,18 +3,22 @@ import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {SellComponent} from "./sell.component";
-import {SellCreateModalService} from "../services/sell-create.modal.service";
+import {SellCreateModalService} from "../services/modal/sell-create.modal.service";
 import {SellCreateComponent} from "./sell-create.component";
 import {ItemService} from "../services/item.service";
+import {SellEditComponent} from "./sell-edit.component";
+import {SellEditModalService} from "../services/modal/sell-edit.modal.service";
 
 @NgModule({
   declarations: [
     SellComponent,
-    SellCreateComponent
+    SellCreateComponent,
+    SellEditComponent
   ],
   exports: [SellComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule, ReactiveFormsModule],
-  providers: [SellCreateModalService, ItemService]
+  providers: [SellCreateModalService, SellEditModalService, ItemService],
+  entryComponents: [SellCreateComponent, SellEditComponent]
 })
 export class SellModule {
 }

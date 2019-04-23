@@ -6,7 +6,7 @@ import {ProfileComponent} from "./profile.component";
 import {AuthenticationService} from "../services/authentication.service";
 import {EmailValidator} from "../shared/validators/EmailValidator";
 import {DeleteProfileComponent} from "./delete.profile.component";
-import {DeleteProfileService} from "../services/delete.profile.modal.service";
+import {DeleteProfileService} from "../services/modal/delete.profile.modal.service";
 
 @NgModule({
   declarations: [

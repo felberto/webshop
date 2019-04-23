@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
-import {SellCreateComponent} from "../sell/sell-create.component";
+import {SellCreateComponent} from "../../sell/sell-create.component";
 
 @Injectable()
 export class SellCreateModalService {

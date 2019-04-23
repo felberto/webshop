@@ -1,18 +1,22 @@
 import {Injectable} from "@angular/core";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
-import {DeleteProfileComponent} from "../profile/delete.profile.component";
+import {LoginComponent} from "../../login/login.component";
 
 @Injectable()
-export class DeleteProfileService {
+export class LoginModalService {
   private isOpen = false;
-  constructor(private modalService: NgbModal) {}
+
+  constructor(
+    private modalService: NgbModal,
+  ) {
+  }
 
   open(): NgbModalRef {
     if (this.isOpen) {
       return;
     }
     this.isOpen = true;
-    const modalRef = this.modalService.open(DeleteProfileComponent, {centered: true});
+    const modalRef = this.modalService.open(LoginComponent, {centered: true});
     modalRef.result.then((result) => {
       this.isOpen = false;
     }, (reason) => {

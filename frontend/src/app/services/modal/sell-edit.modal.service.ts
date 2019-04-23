@@ -1,20 +1,24 @@
-import {Injectable} from "@angular/core";
+import {Injectable, Input} from "@angular/core";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
-import {LoginComponent} from "../login/login.component";
+import {SellEditComponent} from "../../sell/sell-edit.component";
+import {Item} from "../../models/item";
 
 @Injectable()
-export class LoginModalService {
+export class SellEditModalService {
   private isOpen = false;
+
   constructor(
     private modalService: NgbModal,
-  ) {}
+  ) {
+  }
 
-  open(): NgbModalRef {
+  open(item: Item): NgbModalRef {
     if (this.isOpen) {
       return;
     }
     this.isOpen = true;
-    const modalRef = this.modalService.open(LoginComponent, {centered: true});
+    const modalRef = this.modalService.open(SellEditComponent, {centered: true});
+    modalRef.componentInstance.item = item;
     modalRef.result.then((result) => {
       this.isOpen = false;
     }, (reason) => {
