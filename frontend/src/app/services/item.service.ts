@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {SERVER_API_URL} from "../app.constants";
 import {Item} from "../models/item";
 import {CreateItemDto} from "../models/dto/create-item.dto";
+import {EditItemDto} from "../models/dto/edit-item.dto";
 
 @Injectable()
 export class ItemService {
@@ -13,6 +14,10 @@ export class ItemService {
 
   save(createItemDto: CreateItemDto): Observable<HttpResponse<Item>> {
     return this.http.post<Item>(SERVER_API_URL + '/item', createItemDto, {observe: 'response'});
+  }
+
+  update(editItemDto: EditItemDto, id: number): Observable<HttpResponse<Item>> {
+    return this.http.put<Item>(SERVER_API_URL + `/item/${id}`, editItemDto, {observe: 'response'});
   }
 
   getAllByCustomer(id: number): Observable<HttpResponse<Item[]>> {

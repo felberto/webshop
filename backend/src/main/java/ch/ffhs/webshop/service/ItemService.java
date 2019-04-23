@@ -3,7 +3,9 @@ package ch.ffhs.webshop.service;
 import ch.ffhs.webshop.domain.Item;
 import ch.ffhs.webshop.domain.dto.CreateItemDto;
 import ch.ffhs.webshop.domain.dto.DtoEntity;
+import ch.ffhs.webshop.domain.dto.EditItemDto;
 import ch.ffhs.webshop.domain.dto.ItemDto;
+import ch.ffhs.webshop.exception.ItemNotFoundException;
 import ch.ffhs.webshop.repository.ItemRepository;
 import ch.ffhs.webshop.util.DtoUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,6 +28,15 @@ public class ItemService {
     public ItemService(ItemRepository itemRepository, CustomerService customerService) {
         this.itemRepository = itemRepository;
         this.customerService = customerService;
+    }
+
+    public Item findOne(Long id) {
+        Optional<Item> item = itemRepository.findById(id);
+
+        if (!item.isPresent())
+            throw new ItemNotFoundException("id-" + id);
+
+        return item.get();
     }
 
     public List<Item> findAll() {
@@ -51,5 +63,24 @@ public class ItemService {
         return list.stream()
                 .map(item -> new DtoUtils().convertToDto(item, new ItemDto()))
                 .collect(Collectors.toList());
+    }
+
+    public DtoEntity update(Long id, EditItemDto editItemDto) {
+        Item item = findOne(id);
+        Item updatedItem = itemRepository.save(updateItemValues(editItemDto, item));
+        return new DtoUtils().convertToDto(updatedItem, new ItemDto());
+    }
+
+    private Item updateItemValues(EditItemDto editItemDto, Item originalItem){
+        if (!originalItem.getTitle().equals(editItemDto.getTitle())){
+            originalItem.setTitle(editItemDto.getTitle());
+        }
+        else if (!originalItem.getDescription().equals(editItemDto.getDescription())){
+            originalItem.setDescription(editItemDto.getDescription());
+        }
+        else if (!originalItem.getPrice().equals(editItemDto.getPrice())){
+            originalItem.setPrice(editItemDto.getPrice());
+        }
+        return originalItem;
     }
 }

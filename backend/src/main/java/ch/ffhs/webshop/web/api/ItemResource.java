@@ -3,6 +3,7 @@ package ch.ffhs.webshop.web.api;
 import ch.ffhs.webshop.domain.Item;
 import ch.ffhs.webshop.domain.dto.CreateItemDto;
 import ch.ffhs.webshop.domain.dto.DtoEntity;
+import ch.ffhs.webshop.domain.dto.EditItemDto;
 import ch.ffhs.webshop.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,4 +43,9 @@ public class ItemResource {
         return itemService.save(itemDto);
     }
 
+    @PutMapping(value = "/item/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public DtoEntity update(@PathVariable("id") Long id, @RequestBody EditItemDto editItemDto) {
+        return itemService.update(id, editItemDto);
+    }
 }
