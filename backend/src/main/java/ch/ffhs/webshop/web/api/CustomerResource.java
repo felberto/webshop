@@ -40,6 +40,7 @@ public class CustomerResource {
     @PostMapping("/customer")
     @ResponseStatus(HttpStatus.CREATED)
     public Customer create(@RequestBody Customer customer) {
+        customer.setActive(true);
         return customerService.save(customer);
     }
 
