@@ -21,7 +21,8 @@ create table item (
   image varchar,
   seller_id integer not null references customer (id),
   buyer_id integer references customer (id),
-  sold timestamp -- without time zone or with time zone?
+  sold timestamp, -- without time zone or with time zone?
+  cart_customer_id integer references customer (id)
 );
 
 alter table item

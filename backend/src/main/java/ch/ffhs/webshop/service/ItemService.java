@@ -52,4 +52,11 @@ public class ItemService {
                 .map(item -> new DtoUtils().convertToDto(item, new ItemDto()))
                 .collect(Collectors.toList());
     }
+
+    public List<DtoEntity> findAllCartItems(Long id){
+        List<Item> list = itemRepository.findAllByCart(id);
+        return list.stream()
+                .map((item -> new DtoUtils().convertToDto(item, new ItemDto())))
+                .collect(Collectors.toList());
+    }
 }

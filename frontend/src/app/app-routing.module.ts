@@ -5,6 +5,7 @@ import {ProfileComponent} from "./profile/profile.component";
 import {AuthGuard} from "./shared/guards/auth.guard";
 import {SellComponent} from "./sell/sell.component";
 import {SearchComponent} from "./search/search.component";
+import {CartComponent} from "./cart/cart.component";
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
     path: 'sell',
     component: SellComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'cart',
+    component: CartComponent
   },
   {
     path: '**',

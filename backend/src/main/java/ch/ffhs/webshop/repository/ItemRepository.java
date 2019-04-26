@@ -16,4 +16,6 @@ public interface ItemRepository extends CrudRepository<Item, Long> {
     @Query(value = "SELECT * FROM item WHERE buyer_id IS NULL",
             nativeQuery = true)
     List<Item> findAllWhereBuyerIsNull();
+
+    List<Item> findAllByCart(Long id);
 }

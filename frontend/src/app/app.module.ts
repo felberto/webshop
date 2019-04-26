@@ -14,6 +14,7 @@ import {SellModule} from "./sell/sell.module";
 import {SellCreateComponent} from "./sell/sell-create.component";
 import {FormsModule} from "@angular/forms";
 import {SearchModule} from "./search/search.module";
+import {CartModule} from "./cart/cart.module";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {SearchModule} from "./search/search.module";
     RegistrationModule,
     ProfileModule,
     SellModule,
-    SearchModule
+    SearchModule,
+    CartModule
   ],
   entryComponents: [
     SellCreateComponent

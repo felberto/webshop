@@ -36,6 +36,11 @@ public class ItemResource {
         return itemService.findAllAvailable();
     }
 
+    @GetMapping(value = "/item/cart/customer/{id}")
+    public List<DtoEntity> findAllCartItems(@PathVariable("id") Long id){
+        return itemService.findAllCartItems(id);
+    }
+
     @PostMapping("/item")
     @ResponseStatus(HttpStatus.CREATED)
     public DtoEntity create(@RequestBody CreateItemDto itemDto) {

@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <!-- header -->
+  <div class="row">
+    <div class="col-8">
+      <p>ARTICLE</p>
+    </div>
+    <div class="col-2">
+      <p>SELLER</p>
+    </div>
+    <div class="col-2 text-right">
+      <p>PRICE</p>
+    </div>
+  </div>
+  <!-- items -->
+  <div class="row pt-2 pb-2 item" *ngFor="let item of cartItems">
+    <div class="col-2">
+      <div *ngIf="item.image == null">
+        <img src="../../assets/images/placeholder.png" alt="default item image">
+      </div>
+      <div *ngIf="item.image != null">
+        <img [src]="getImageSrc(item)" alt="item image">
+      </div>
+    </div>
+    <div class="col-6">
+      <h6>{{item.title}}</h6>
+      <p>{{item.description}}</p>
+    </div>
+    <div class="col-2">
+      <p *ngIf="item.seller != undefined">
+        <small class="text-muted">{{item.seller.email}}</small>
+      </p>
+    </div>
+    <div class="col-2">
+      <p class="card-text font-weight-bold float-right">CHF {{item.price}}.-</p>
+    </div>
+  </div>
+  <br/>
+  <button type="button" class="btn btn-secondary btn-lg">Buy articles</button>
+</div>
+
