@@ -18,4 +18,6 @@ public interface ItemRepository extends CrudRepository<Item, Long> {
     List<Item> findAllWhereBuyerIsNull();
 
     List<Item> findAllByCart(Long id);
+
+    Item findItemByTitleAndDescription(String title, String description);
 }

@@ -47,4 +47,9 @@ public class ItemResource {
         return itemService.save(itemDto);
     }
 
+    @PutMapping(value = "/item/removed")
+    @ResponseStatus(HttpStatus.OK)
+    public DtoEntity removeFromCart(@RequestBody CreateItemDto itemDto) {
+        return itemService.removeFromCart(itemDto);
+    }
 }

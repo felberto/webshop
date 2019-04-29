@@ -59,4 +59,11 @@ public class ItemService {
                 .map((item -> new DtoUtils().convertToDto(item, new ItemDto())))
                 .collect(Collectors.toList());
     }
+
+    public DtoEntity removeFromCart(CreateItemDto itemDto) {
+        Item item = itemRepository.findItemByTitleAndDescription(itemDto.getTitle(), itemDto.getDescription());
+        item.setCart(null);
+        Item returnItem = itemRepository.save(item);
+        return new DtoUtils().convertToDto(returnItem, new ItemDto());
+    }
 }

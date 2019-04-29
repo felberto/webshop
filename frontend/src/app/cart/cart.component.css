@@ -1,9 +1,30 @@
-.item {
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+.card {
+  border: none;
+  border-radius: 0;
 }
-img {
+.card-body {
+  padding-right: 0;
+}
+.card-horizontal {
+  display: flex;
+  border-top: 1px solid #ccc;
+}
+.image-centered > img {
   max-height: 100px;
+  width: 100px;
   object-fit: contain;
+}
+.image-centered {
+  padding: 1.25rem 0 1.25rem 0;
+  margin: auto;
+}
+.total {
+  border-top: 3px solid #ccc;
+}
+.delete-icon {
+  margin: auto 1.5rem auto 0;
+}
+.delete-icon > img {
+  width: 25px;
 }
 
