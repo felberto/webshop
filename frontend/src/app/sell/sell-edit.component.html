@@ -1,0 +1,56 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Edit item</h4>
+  <button type="button" class="close" aria-describedby="modal-title" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <ngx-spinner></ngx-spinner>
+      <form *ngIf="isDataAvailable" (ngSubmit)="onSubmit(editItemForm)" #editItemForm="ngForm">
+        <div class="form-group">
+          <label for="title">Title:</label>
+          <input class="form-control" type="text" id="title" name="title" required
+                 [(ngModel)]="item.title" [value]="item.title"
+                 #title="ngModel" [ngClass]="{'is-invalid': title.dirty && title.errors}">
+          <div *ngIf=" title.dirty && title.errors" class="invalid-feedback">
+            <div *ngIf="title.errors.required">Title is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description">Description:</label>
+          <input class="form-control" type="text" id="description" name="description" required
+                 [(ngModel)]="item.description" [value]="item.description"
+                 #description="ngModel" [ngClass]="{'is-invalid': description.dirty && description.errors}">
+          <div *ngIf="description.dirty && description.errors" class="invalid-feedback">
+            <div *ngIf="description.errors.required">Description is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="price">Price:</label>
+          <input class="form-control" type="number" id="price" name="price" required
+                 [(ngModel)]="item.price" [value]="item.price"
+                 #price="ngModel" [ngClass]="{'is-invalid': price.errors && price.dirty}">
+          <div *ngIf="price.errors && price.dirty" class="invalid-feedback">
+            <div *ngIf="price.errors.required">Price is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="image">Image:</label>
+          <input
+            class="form-control"
+            id="image"
+            name="image"
+            #image
+            type="file"
+            accept="image/*"
+            (change)="processFile(image)" [ngClass]="{'is-invalid': image.errors && image.dirty}">
+        </div>
+        <div class="form-group">
+          <button [disabled]="!(editItemForm.dirty && editItemForm.valid)" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

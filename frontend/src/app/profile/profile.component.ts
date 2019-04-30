@@ -5,7 +5,7 @@ import {first} from "rxjs/operators";
 import {CustomerService} from "../services/customer.service";
 import {ToastrService} from "ngx-toastr";
 import {NgForm} from "@angular/forms";
-import {DeleteProfileService} from "../services/delete.profile.modal.service";
+import {DeleteProfileService} from "../services/modal/delete.profile.modal.service";
 
 @Component({
   selector: 'profile',
