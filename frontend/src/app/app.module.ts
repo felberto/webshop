@@ -11,7 +11,6 @@ import {ToastrModule} from "ngx-toastr";
 import {ProfileModule} from "./profile/profile.module";
 import {AuthGuard} from "./shared/guards/auth.guard";
 import {SellModule} from "./sell/sell.module";
-import {SellCreateComponent} from "./sell/sell-create.component";
 import {FormsModule} from "@angular/forms";
 import {SearchModule} from "./search/search.module";
 import {CartModule} from "./cart/cart.module";
@@ -34,9 +33,7 @@ import {CartModule} from "./cart/cart.module";
     SearchModule,
     CartModule
   ],
-  entryComponents: [
-    SellCreateComponent
-  ],
+  entryComponents: [],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
 })

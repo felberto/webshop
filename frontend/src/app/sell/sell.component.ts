@@ -1,10 +1,11 @@
-import {Component, OnInit, SecurityContext} from "@angular/core";
-import {SellCreateModalService} from "../services/sell-create.modal.service";
+import {Component, OnInit} from "@angular/core";
+import {SellCreateModalService} from "../services/modal/sell-create.modal.service";
 import {ItemService} from "../services/item.service";
 import {AuthenticationService} from "../services/authentication.service";
 import {Customer} from "../models/customer";
 import {Item} from "../models/item";
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
+import {SellEditModalService} from "../services/modal/sell-edit.modal.service";
 
 @Component({
   selector: 'sell',
@@ -16,7 +17,7 @@ export class SellComponent implements OnInit {
   currentUser: Customer;
   items: Item[];
 
-  constructor(private domSanitizer: DomSanitizer, private authService: AuthenticationService, private sellCreateModalService: SellCreateModalService, private itemService: ItemService) {
+  constructor(private domSanitizer: DomSanitizer, private authService: AuthenticationService, private sellCreateModalService: SellCreateModalService, private sellEditModalService: SellEditModalService, private itemService: ItemService) {
     this.authService.currentUser.subscribe(x => this.currentUser = x);
   }
 
@@ -30,13 +31,35 @@ export class SellComponent implements OnInit {
     return this.domSanitizer.bypassSecurityTrustResourceUrl(atob(item.image));
   }
 
-  openModal() {
-    this.sellCreateModalService.open().result.then((data) => {
-      this.refreshData(data);
-    });
+  openModal(item: Item) {
+    if (item == null) {
+      this.sellCreateModalService.open().result.then((data) => {
+        this.refreshData(data);
+      });
+    } else {
+      this.sellEditModalService.open(item.id).result.then((data) => {
+        this.updateData(data);
+      });
+    }
   }
 
   refreshData(data: any) {
     this.items.push(data);
+  }
+
+  showEdit(cardEdit) {
+    cardEdit.setAttribute("style", "display: block;");
+  }
+
+  hideEdit(cardEdit) {
+    cardEdit.setAttribute("style", "display: none;");
+  }
+
+  private updateData(item: Item) {
+    this.items.forEach((obj => {
+      if (obj.id == item.id) {
+        this.items[this.items.indexOf(obj)] = item;
+      }
+    }));
   }
 }

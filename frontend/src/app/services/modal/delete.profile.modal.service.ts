@@ -1,11 +1,13 @@
 import {Injectable} from "@angular/core";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
-import {DeleteProfileComponent} from "../profile/delete.profile.component";
+import {DeleteProfileComponent} from "../../profile/delete.profile.component";
 
 @Injectable()
 export class DeleteProfileService {
   private isOpen = false;
-  constructor(private modalService: NgbModal) {}
+
+  constructor(private modalService: NgbModal) {
+  }
 
   open(): NgbModalRef {
     if (this.isOpen) {

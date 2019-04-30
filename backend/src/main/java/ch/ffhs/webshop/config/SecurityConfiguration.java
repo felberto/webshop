@@ -27,7 +27,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.cors();
-        http.authorizeRequests().antMatchers("/**").permitAll();
+        http.authorizeRequests().antMatchers("/**").permitAll().antMatchers("/v2/api-docs", "/configuration/**", "/swagger-ui.html", "/webjars/**", "/swagger-resources/**").permitAll();
     }
 
     /**
