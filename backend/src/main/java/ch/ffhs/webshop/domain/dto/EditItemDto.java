@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 
 @Data
 public class EditItemDto implements DtoEntity {
+    private Long id;
     private String title;
     private String description;
     private BigDecimal price;

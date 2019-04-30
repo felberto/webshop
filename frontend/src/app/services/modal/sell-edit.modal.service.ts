@@ -12,13 +12,13 @@ export class SellEditModalService {
   ) {
   }
 
-  open(item: Item): NgbModalRef {
+  open(itemId: number): NgbModalRef {
     if (this.isOpen) {
       return;
     }
     this.isOpen = true;
     const modalRef = this.modalService.open(SellEditComponent, {centered: true});
-    modalRef.componentInstance.item = item;
+    modalRef.componentInstance.itemId = itemId;
     modalRef.result.then((result) => {
       this.isOpen = false;
     }, (reason) => {

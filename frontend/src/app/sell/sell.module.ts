@@ -8,6 +8,7 @@ import {SellCreateComponent} from "./sell-create.component";
 import {ItemService} from "../services/item.service";
 import {SellEditComponent} from "./sell-edit.component";
 import {SellEditModalService} from "../services/modal/sell-edit.modal.service";
+import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -16,8 +17,8 @@ import {SellEditModalService} from "../services/modal/sell-edit.modal.service";
     SellEditComponent
   ],
   exports: [SellComponent],
-  imports: [BrowserModule, FormsModule, HttpClientModule, ReactiveFormsModule],
-  providers: [SellCreateModalService, SellEditModalService, ItemService],
+  imports: [BrowserModule, FormsModule, HttpClientModule, ReactiveFormsModule, NgxSpinnerModule],
+  providers: [SellCreateModalService, SellEditModalService, ItemService, NgxSpinnerService],
   entryComponents: [SellCreateComponent, SellEditComponent]
 })
 export class SellModule {

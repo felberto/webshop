@@ -1,4 +1,4 @@
-import {Component, OnInit, SecurityContext} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {SellCreateModalService} from "../services/modal/sell-create.modal.service";
 import {ItemService} from "../services/item.service";
 import {AuthenticationService} from "../services/authentication.service";
@@ -32,18 +32,25 @@ export class SellComponent implements OnInit {
   }
 
   openModal(item: Item) {
-    if (item == null){
+    if (item == null) {
       this.sellCreateModalService.open().result.then((data) => {
         this.refreshData(data);
       });
-    }
-    else if (item != null){
-      this.sellEditModalService.open(item);
+    } else {
+      this.sellEditModalService.open(item.id);
     }
 
   }
 
   refreshData(data: any) {
     this.items.push(data);
+  }
+
+  showEdit(cardEdit) {
+    cardEdit.setAttribute("style", "display: block;");
+  }
+
+  hideEdit(cardEdit) {
+    cardEdit.setAttribute("style", "display: none;");
   }
 }

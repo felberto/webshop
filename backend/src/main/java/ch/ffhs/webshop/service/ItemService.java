@@ -30,13 +30,13 @@ public class ItemService {
         this.customerService = customerService;
     }
 
-    public Item findOne(Long id) {
+    public DtoEntity findOne(Long id) {
         Optional<Item> item = itemRepository.findById(id);
 
         if (!item.isPresent())
             throw new ItemNotFoundException("id-" + id);
 
-        return item.get();
+        return new DtoUtils().convertToDto(item.get(), new EditItemDto());
     }
 
     public List<Item> findAll() {
@@ -66,18 +66,17 @@ public class ItemService {
     }
 
     public void update(Long id, EditItemDto editItemDto) {
-        Item item = findOne(id);
+        DtoEntity dtoEntity = findOne(id);
+        Item item = (Item) new DtoUtils().convertToEntity(new Item(), dtoEntity);
         itemRepository.save(updateItemValues(editItemDto, item));
     }
 
-    private Item updateItemValues(EditItemDto editItemDto, Item originalItem){
-        if (!originalItem.getTitle().equals(editItemDto.getTitle())){
+    private Item updateItemValues(EditItemDto editItemDto, Item originalItem) {
+        if (!originalItem.getTitle().equals(editItemDto.getTitle())) {
             originalItem.setTitle(editItemDto.getTitle());
-        }
-        else if (!originalItem.getDescription().equals(editItemDto.getDescription())){
+        } else if (!originalItem.getDescription().equals(editItemDto.getDescription())) {
             originalItem.setDescription(editItemDto.getDescription());
-        }
-        else if (!originalItem.getPrice().equals(editItemDto.getPrice())){
+        } else if (!originalItem.getPrice().equals(editItemDto.getPrice())) {
             originalItem.setPrice(editItemDto.getPrice());
         }
         return originalItem;

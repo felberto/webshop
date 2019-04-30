@@ -5,6 +5,7 @@ import {SERVER_API_URL} from "../app.constants";
 import {Item} from "../models/item";
 import {CreateItemDto} from "../models/dto/create-item.dto";
 import {EditItemDto} from "../models/dto/edit-item.dto";
+import {Customer} from "../models/customer";
 
 @Injectable()
 export class ItemService {
@@ -18,6 +19,14 @@ export class ItemService {
 
   update(editItemDto: EditItemDto, id: number): Observable<HttpResponse<Item>> {
     return this.http.put<Item>(SERVER_API_URL + `/item/${id}`, editItemDto, {observe: 'response'});
+  }
+
+  get(id: number): Promise<EditItemDto>{
+    return this.http.get<EditItemDto>(SERVER_API_URL + `/item/${id}`, {observe: 'response'}).toPromise()
+      .then(res => res.body)
+      .catch(err => {
+        return Promise.reject(err.json().error  || 'Server error');
+      });
   }
 
   getAllByCustomer(id: number): Observable<HttpResponse<Item[]>> {

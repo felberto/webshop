@@ -27,6 +27,11 @@ public class ItemResource {
         return itemService.findAll();
     }
 
+    @GetMapping("/item/{id}")
+    public DtoEntity findOne(@PathVariable("id") Long id) {
+        return itemService.findOne(id);
+    }
+
     @GetMapping(value = "/item/customer/{id}")
     public List<DtoEntity> findAllByCustomer(@PathVariable("id") Long id) {
         return itemService.findAllByCustomer(id);
