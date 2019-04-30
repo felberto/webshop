@@ -37,9 +37,10 @@ export class SellComponent implements OnInit {
         this.refreshData(data);
       });
     } else {
-      this.sellEditModalService.open(item.id);
+      this.sellEditModalService.open(item.id).result.then((data) => {
+        this.updateData(data);
+      });
     }
-
   }
 
   refreshData(data: any) {
@@ -52,5 +53,13 @@ export class SellComponent implements OnInit {
 
   hideEdit(cardEdit) {
     cardEdit.setAttribute("style", "display: none;");
+  }
+
+  private updateData(item: Item) {
+    this.items.forEach((obj => {
+      if (obj.id == item.id) {
+        this.items[this.items.indexOf(obj)] = item;
+      }
+    }));
   }
 }

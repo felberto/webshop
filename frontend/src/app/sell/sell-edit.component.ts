@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input, OnInit, ViewChild} from "@angular/core";
 import {FormBuilder, NgForm} from "@angular/forms";
 import {Router} from "@angular/router";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
@@ -14,6 +14,7 @@ import {NgxSpinnerService} from "ngx-spinner";
 })
 export class SellEditComponent implements OnInit {
   @Input() public itemId;
+  @ViewChild('editItemForm') form: any;
   item: EditItemDto;
   isDataAvailable:boolean = false;
 
@@ -61,6 +62,8 @@ export class SellEditComponent implements OnInit {
     });
 
     reader.readAsDataURL(file);
+
+    this.form.control.markAsDirty();
   }
 
   private markFormAsPristine(form: NgForm) {

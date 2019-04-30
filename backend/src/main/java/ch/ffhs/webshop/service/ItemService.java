@@ -36,7 +36,7 @@ public class ItemService {
         if (!item.isPresent())
             throw new ItemNotFoundException("id-" + id);
 
-        return new DtoUtils().convertToDto(item.get(), new EditItemDto());
+        return new DtoUtils().convertToDto(item.get(), new ItemDto());
     }
 
     public List<Item> findAll() {
