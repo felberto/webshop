@@ -28,12 +28,14 @@ public class Item {
     private Customer seller;
     private Long buyer_id;
     private Timestamp sold;
+    @Column(name = "cart_customer_id")
+    private Long cart;
 
     public Item() {
     }
 
     public Item(String title, String description, BigDecimal price,
-                String image, Customer seller, Long buyer_id, Timestamp sold) {
+                String image, Customer seller, Long buyer_id, Timestamp sold, Long cart) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -41,5 +43,6 @@ public class Item {
         this.seller = seller;
         this.buyer_id = buyer_id;
         this.sold = sold;
+        this.cart = cart;
     }
 }

@@ -42,6 +42,11 @@ public class ItemResource {
         return itemService.findAllAvailable();
     }
 
+    @GetMapping(value = "/item/cart/customer/{id}")
+    public List<DtoEntity> findAllCartItems(@PathVariable("id") Long id){
+        return itemService.findAllCartItems(id);
+    }
+
     @PostMapping("/item")
     @ResponseStatus(HttpStatus.CREATED)
     public DtoEntity create(@RequestBody CreateItemDto itemDto) {
@@ -52,5 +57,11 @@ public class ItemResource {
     @ResponseStatus(HttpStatus.OK)
     public void update(@PathVariable("id") Long id, @RequestBody EditItemDto editItemDto) {
         itemService.update(id, editItemDto);
+    }
+
+    @PutMapping(value = "/item/removed")
+    @ResponseStatus(HttpStatus.OK)
+    public DtoEntity removeFromCart(@RequestBody CreateItemDto itemDto) {
+        return itemService.removeFromCart(itemDto);
     }
 }

@@ -13,6 +13,7 @@ import {AuthGuard} from "./shared/guards/auth.guard";
 import {SellModule} from "./sell/sell.module";
 import {FormsModule} from "@angular/forms";
 import {SearchModule} from "./search/search.module";
+import {CartModule} from "./cart/cart.module";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {SearchModule} from "./search/search.module";
     RegistrationModule,
     ProfileModule,
     SellModule,
-    SearchModule
+    SearchModule,
+    CartModule
   ],
   entryComponents: [],
   providers: [AuthGuard],

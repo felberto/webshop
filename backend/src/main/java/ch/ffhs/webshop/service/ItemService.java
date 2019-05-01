@@ -81,4 +81,18 @@ public class ItemService {
         }
         return originalItem;
     }
+
+    public List<DtoEntity> findAllCartItems(Long id){
+        List<Item> list = itemRepository.findAllByCart(id);
+        return list.stream()
+                .map((item -> new DtoUtils().convertToDto(item, new ItemDto())))
+                .collect(Collectors.toList());
+    }
+
+    public DtoEntity removeFromCart(CreateItemDto itemDto) {
+        Item item = itemRepository.findItemByTitleAndDescription(itemDto.getTitle(), itemDto.getDescription());
+        item.setCart(null);
+        Item returnItem = itemRepository.save(item);
+        return new DtoUtils().convertToDto(returnItem, new ItemDto());
+    }
 }
