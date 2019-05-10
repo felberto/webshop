@@ -44,4 +44,8 @@ export class ItemService {
   removeFromCart(item: CreateItemDto): Observable<HttpResponse<Item>> {
     return this.http.put<Item>(SERVER_API_URL + `/item/removed`, item, {observe: 'response'});
   }
+
+  addToCart(itemId: number, customerId: number): Observable<{}> {
+    return this.http.put(SERVER_API_URL + `/item/add`, {itemId, customerId}, {observe: 'response'});
+  }
 }

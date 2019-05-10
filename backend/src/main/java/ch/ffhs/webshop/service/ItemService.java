@@ -1,10 +1,7 @@
 package ch.ffhs.webshop.service;
 
 import ch.ffhs.webshop.domain.Item;
-import ch.ffhs.webshop.domain.dto.CreateItemDto;
-import ch.ffhs.webshop.domain.dto.DtoEntity;
-import ch.ffhs.webshop.domain.dto.EditItemDto;
-import ch.ffhs.webshop.domain.dto.ItemDto;
+import ch.ffhs.webshop.domain.dto.*;
 import ch.ffhs.webshop.exception.ItemNotFoundException;
 import ch.ffhs.webshop.repository.ItemRepository;
 import ch.ffhs.webshop.util.DtoUtils;
@@ -59,7 +56,7 @@ public class ItemService {
     }
 
     public List<DtoEntity> findAllAvailable() {
-        List<Item> list = itemRepository.findAllWhereBuyerIsNull();
+        List<Item> list = itemRepository.findAllWhereBuyerIsNullAndCartIsNull();
         return list.stream()
                 .map(item -> new DtoUtils().convertToDto(item, new ItemDto()))
                 .collect(Collectors.toList());
@@ -82,7 +79,7 @@ public class ItemService {
         return originalItem;
     }
 
-    public List<DtoEntity> findAllCartItems(Long id){
+    public List<DtoEntity> findAllCartItems(Long id) {
         List<Item> list = itemRepository.findAllByCart(id);
         return list.stream()
                 .map((item -> new DtoUtils().convertToDto(item, new ItemDto())))
@@ -94,5 +91,12 @@ public class ItemService {
         item.setCart(null);
         Item returnItem = itemRepository.save(item);
         return new DtoUtils().convertToDto(returnItem, new ItemDto());
+    }
+
+    public void addToCart(AddCartDto addCartDto) {
+        DtoEntity dtoEntity = findOne(addCartDto.getItemId());
+        Item item = (Item) new DtoUtils().convertToEntity(new Item(), dtoEntity);
+        item.setCart(addCartDto.getCustomerId());
+        itemRepository.save(item);
     }
 }
