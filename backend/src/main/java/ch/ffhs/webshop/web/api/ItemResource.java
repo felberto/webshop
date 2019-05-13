@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -71,5 +72,11 @@ public class ItemResource {
     @ResponseStatus(HttpStatus.OK)
     public void addToCart(@RequestBody AddCartDto addCartDto) {
         itemService.addToCart(addCartDto);
+    }
+
+    @PutMapping(value = "/item/buy/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void buyItems(@PathVariable("id") Long customerId, @RequestBody List<Long> itemIds) {
+        itemService.buyItems(customerId, itemIds);
     }
 }

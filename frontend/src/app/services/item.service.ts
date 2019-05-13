@@ -5,7 +5,6 @@ import {SERVER_API_URL} from "../app.constants";
 import {Item} from "../models/item";
 import {CreateItemDto} from "../models/dto/create-item.dto";
 import {EditItemDto} from "../models/dto/edit-item.dto";
-import {Customer} from "../models/customer";
 
 @Injectable()
 export class ItemService {
@@ -21,11 +20,11 @@ export class ItemService {
     return this.http.put<Item>(SERVER_API_URL + `/item/${id}`, editItemDto, {observe: 'response'});
   }
 
-  get(id: number): Promise<EditItemDto>{
+  get(id: number): Promise<EditItemDto> {
     return this.http.get<EditItemDto>(SERVER_API_URL + `/item/${id}`, {observe: 'response'}).toPromise()
       .then(res => res.body)
       .catch(err => {
-        return Promise.reject(err.json().error  || 'Server error');
+        return Promise.reject(err.json().error || 'Server error');
       });
   }
 
@@ -47,5 +46,9 @@ export class ItemService {
 
   addToCart(itemId: number, customerId: number): Observable<{}> {
     return this.http.put(SERVER_API_URL + `/item/add`, {itemId, customerId}, {observe: 'response'});
+  }
+
+  buyItems(cartItemsId: number[], customerId: number): Observable<{}> {
+    return this.http.put(SERVER_API_URL + `/item/buy/${customerId}`, cartItemsId, {observe: 'response'});
   }
 }

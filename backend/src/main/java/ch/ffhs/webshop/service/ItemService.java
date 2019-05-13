@@ -8,7 +8,9 @@ import ch.ffhs.webshop.util.DtoUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -98,5 +100,13 @@ public class ItemService {
         Item item = (Item) new DtoUtils().convertToEntity(new Item(), dtoEntity);
         item.setCart(addCartDto.getCustomerId());
         itemRepository.save(item);
+    }
+
+    public void buyItems(Long customerId, List<Long> itemIds) {
+        itemIds.stream().map(this::findOne).map(dtoEntity -> (Item) new DtoUtils().convertToEntity(new Item(), dtoEntity)).forEach(item -> {
+            item.setBuyer_id(customerId);
+            item.setSold(new Timestamp(System.currentTimeMillis()));
+            itemRepository.save(item);
+        });
     }
 }
