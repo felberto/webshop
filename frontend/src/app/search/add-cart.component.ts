@@ -6,6 +6,7 @@ import {first} from "rxjs/operators";
 import {ItemService} from "../services/item.service";
 import {Customer} from "../models/customer";
 import {AuthenticationService} from "../services/authentication.service";
+import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 
 @Component({
   selector: 'add-cart',
@@ -15,11 +16,15 @@ export class AddCartComponent implements OnInit {
   @Input() item;
   currentUser: Customer;
 
-  constructor(private authService: AuthenticationService, private router: Router, public activeModal: NgbActiveModal, private toastr: ToastrService, private itemService: ItemService) {
+  constructor(private domSanitizer: DomSanitizer, private authService: AuthenticationService, private router: Router, public activeModal: NgbActiveModal, private toastr: ToastrService, private itemService: ItemService) {
     this.authService.currentUser.subscribe(x => this.currentUser = x);
   }
 
   ngOnInit(): void {
+  }
+
+  getImageSrc(item: any): SafeResourceUrl {
+    return this.domSanitizer.bypassSecurityTrustResourceUrl(atob(item.image));
   }
 
   addCart() {

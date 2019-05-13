@@ -6,8 +6,16 @@
 </div>
 <div class="modal-body">
   <div class="row justify-content-center">
-    <div class="col-md-8">
-
+    <div class="float-left w-50">
+      <img class="card-img-top" [src]="getImageSrc(item)" alt="item image">
+    </div>
+    <div class="float-right w-auto">
+      <p class="text-muted">Description</p>
+      <p class="">{{item.description}}</p>
+      <p class="text-muted">Seller</p>
+      <small class="">{{item.seller.email}}</small>
+      <p class="text-muted">Price</p>
+      <p class="font-weight-bold">CHF {{item.price}}.-</p>
     </div>
   </div>
 </div>

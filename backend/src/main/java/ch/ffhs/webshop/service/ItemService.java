@@ -56,7 +56,7 @@ public class ItemService {
     }
 
     public List<DtoEntity> findAllAvailable() {
-        List<Item> list = itemRepository.findAllWhereBuyerIsNullAndCartIsNull();
+        List<Item> list = itemRepository.findAllWhereBuyerIsNull();
         return list.stream()
                 .map(item -> new DtoUtils().convertToDto(item, new ItemDto()))
                 .collect(Collectors.toList());
