@@ -32,6 +32,7 @@ export class DeleteProfileComponent implements OnInit{
             positionClass: "toast-bottom-right"
           });
           this.authService.logout();
+          this.activeModal.dismiss();
           this.router.navigate(['']);
           },
           error => {
