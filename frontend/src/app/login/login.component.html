@@ -33,9 +33,13 @@
     </div>
   </div>
 </div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-outline-secondary" (click)="activeModal.dismiss('cancel')">Cancel
-  </button>
-  <button type="button" class="btn btn-danger" (click)="login()">Login</button>
+<div class="modal-footer d-block">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <button type="button" class="btn btn-primary mr-2" (click)="login()">Login</button>
+      <button type="button" class="btn btn-outline-secondary" (click)="activeModal.dismiss('cancel')">Cancel
+      </button>
+    </div>
+  </div>
 </div>
 
