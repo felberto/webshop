@@ -1,0 +1,26 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">{{item.title}}</h4>
+  <button type="button" class="close" aria-describedby="modal-title" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row justify-content-center">
+    <div class="float-left w-50">
+      <img class="card-img-top" [src]="getImageSrc(item)" alt="item image">
+    </div>
+    <div class="float-right w-auto">
+      <p class="text-muted">Description</p>
+      <p class="">{{item.description}}</p>
+      <p class="text-muted">Seller</p>
+      <small class="">{{item.seller.email}}</small>
+      <p class="text-muted">Price</p>
+      <p class="font-weight-bold">CHF {{item.price}}.-</p>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" (click)="activeModal.dismiss('close')">Cancel
+  </button>
+  <button type="button" class="btn btn-primary" (click)="addCart()">Add to cart</button>
+</div>

@@ -1,6 +1,7 @@
 package ch.ffhs.webshop.web.api;
 
 import ch.ffhs.webshop.domain.Item;
+import ch.ffhs.webshop.domain.dto.AddCartDto;
 import ch.ffhs.webshop.domain.dto.CreateItemDto;
 import ch.ffhs.webshop.domain.dto.DtoEntity;
 import ch.ffhs.webshop.domain.dto.EditItemDto;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -63,5 +66,17 @@ public class ItemResource {
     @ResponseStatus(HttpStatus.OK)
     public DtoEntity removeFromCart(@RequestBody CreateItemDto itemDto) {
         return itemService.removeFromCart(itemDto);
+    }
+
+    @PutMapping(value = "/item/add")
+    @ResponseStatus(HttpStatus.OK)
+    public void addToCart(@RequestBody AddCartDto addCartDto) {
+        itemService.addToCart(addCartDto);
+    }
+
+    @PutMapping(value = "/item/buy/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void buyItems(@PathVariable("id") Long customerId, @RequestBody List<Long> itemIds) {
+        itemService.buyItems(customerId, itemIds);
     }
 }

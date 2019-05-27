@@ -1,17 +1,16 @@
 package ch.ffhs.webshop.service;
 
 import ch.ffhs.webshop.domain.Item;
-import ch.ffhs.webshop.domain.dto.CreateItemDto;
-import ch.ffhs.webshop.domain.dto.DtoEntity;
-import ch.ffhs.webshop.domain.dto.EditItemDto;
-import ch.ffhs.webshop.domain.dto.ItemDto;
+import ch.ffhs.webshop.domain.dto.*;
 import ch.ffhs.webshop.exception.ItemNotFoundException;
 import ch.ffhs.webshop.repository.ItemRepository;
 import ch.ffhs.webshop.util.DtoUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -82,7 +81,7 @@ public class ItemService {
         return originalItem;
     }
 
-    public List<DtoEntity> findAllCartItems(Long id){
+    public List<DtoEntity> findAllCartItems(Long id) {
         List<Item> list = itemRepository.findAllByCart(id);
         return list.stream()
                 .map((item -> new DtoUtils().convertToDto(item, new ItemDto())))
@@ -94,5 +93,20 @@ public class ItemService {
         item.setCart(null);
         Item returnItem = itemRepository.save(item);
         return new DtoUtils().convertToDto(returnItem, new ItemDto());
+    }
+
+    public void addToCart(AddCartDto addCartDto) {
+        DtoEntity dtoEntity = findOne(addCartDto.getItemId());
+        Item item = (Item) new DtoUtils().convertToEntity(new Item(), dtoEntity);
+        item.setCart(addCartDto.getCustomerId());
+        itemRepository.save(item);
+    }
+
+    public void buyItems(Long customerId, List<Long> itemIds) {
+        itemIds.stream().map(this::findOne).map(dtoEntity -> (Item) new DtoUtils().convertToEntity(new Item(), dtoEntity)).forEach(item -> {
+            item.setBuyer_id(customerId);
+            item.setSold(new Timestamp(System.currentTimeMillis()));
+            itemRepository.save(item);
+        });
     }
 }

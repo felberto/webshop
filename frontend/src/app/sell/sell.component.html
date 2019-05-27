@@ -3,13 +3,13 @@
   <br/>
   <br/>
   <div class="grid pb-5">
-    <div class="card" *ngFor="let item of items" (click)="openModal(item)" style="cursor: pointer"
-         (mouseenter)="showEdit(cardEdit)" (mouseleave)="hideEdit(cardEdit)">
+    <div class="card" #card *ngFor="let item of items" (click)="openModal(item)"
+         (mouseenter)="showEdit(cardEdit, item, card)" (mouseleave)="hideEdit(cardEdit)">
       <div class="card-item">
         <div *ngIf="item.image == null">
           <img class="card-img-top" src="../../assets/images/placeholder.png" alt="default item image">
         </div>
-        <div *ngIf="item.image != null">
+        <div *ngIf="item.image != null" class="position-relative">
           <img class="card-img-top" [src]="getImageSrc(item)" alt="item image">
         </div>
         <div class="card-body">
@@ -24,6 +24,11 @@
           <p class="card-text float-left" *ngIf="item.seller != undefined">
             <small class="text-muted">{{item.seller.email}}</small>
           </p>
+        </div>
+      </div>
+      <div *ngIf="item.sold != null" class="card-sold card-img-overlay">
+        <div class="card-body">
+          <img src="../../assets/images/sold.png" class="center">
         </div>
       </div>
       <div class="card-edit card-img-overlay" #cardEdit style="display: none;">
