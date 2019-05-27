@@ -36,7 +36,7 @@ export class SellComponent implements OnInit {
       this.sellCreateModalService.open().result.then((data) => {
         this.refreshData(data);
       });
-    } else {
+    } else if (item.sold == null) {
       this.sellEditModalService.open(item.id).result.then((data) => {
         this.updateData(data);
       });
@@ -47,8 +47,11 @@ export class SellComponent implements OnInit {
     this.items.push(data);
   }
 
-  showEdit(cardEdit) {
-    cardEdit.setAttribute("style", "display: block;");
+  showEdit(cardEdit, item, card) {
+    if(item.sold == null){
+      card.setAttribute("style", "cursor: pointer;");
+      cardEdit.setAttribute("style", "display: block;");
+    }
   }
 
   hideEdit(cardEdit) {
