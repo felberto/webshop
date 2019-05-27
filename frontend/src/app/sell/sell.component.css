@@ -1,0 +1,39 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 20px;
+}
+
+.grid > div {
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
+}
+
+.grid > div img {
+  max-width: 100%;
+}
+
+.card-item {
+  z-index: 1;
+}
+
+.card-edit {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2;
+}
+
+.card-sold {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2;
+}
+
+.center {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

@@ -4,4 +4,5 @@ export class Customer {
   password: string;
   firstName: string;
   lastName: string;
+  active: boolean;
 }

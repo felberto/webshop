@@ -1,8 +1,14 @@
 package ch.ffhs.webshop.service;
 
 import ch.ffhs.webshop.domain.Customer;
+import ch.ffhs.webshop.domain.dto.CustomerAuthDto;
+import ch.ffhs.webshop.domain.dto.CustomerLoginDto;
+import ch.ffhs.webshop.domain.dto.CustomerProfileDto;
+import ch.ffhs.webshop.domain.dto.DtoEntity;
 import ch.ffhs.webshop.exception.CustomerNotFoundException;
 import ch.ffhs.webshop.repository.CustomerRepository;
+import ch.ffhs.webshop.util.DtoUtils;
+import ch.ffhs.webshop.util.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +22,13 @@ public class CustomerService {
     @Autowired
     private final CustomerRepository customerRepository;
 
-    public CustomerService(CustomerRepository customerRepository) {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public CustomerService(CustomerRepository customerRepository, PasswordEncoder passwordEncoder) {
+
         this.customerRepository = customerRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<Customer> findAll() {
@@ -35,15 +46,49 @@ public class CustomerService {
         return customer.get();
     }
 
+    public DtoEntity login(CustomerLoginDto customer) {
+        Customer customer1 = customerRepository.findCustomerByEmail(customer.getEmail());
+        if(!customer1.isActive()) {
+            throw new CustomerNotFoundException("id-" + customer1.getId());
+        }
+        else if (passwordEncoder.passwordEncoder().matches(customer.getPassword(), customer1.getPassword())) {
+            return new DtoUtils().convertToDto(customer1, new CustomerAuthDto());
+        } else {
+            return null;
+        }
+    }
+
     public Customer save(Customer customer) {
+
+        customer.setPassword(passwordEncoder.passwordEncoder().encode(customer.getPassword()));
         return customerRepository.save(customer);
     }
 
-    public void update(Customer customer) {
+    public void update(Long id, CustomerProfileDto customerProfileDto) {
+        Customer customer = findOne(id);
+        customerRepository.save(updateCustomerValues(customerProfileDto, customer));
+    }
+
+    public void deactivateProfile(Long id){
+        Customer customer = findOne(id);
+        customer.setActive(false);
         customerRepository.save(customer);
     }
 
     public void deleteById(Long id) {
         customerRepository.delete(findOne(id));
+    }
+
+    private Customer updateCustomerValues(CustomerProfileDto profileDtoCustomer, Customer originalCustomer){
+        if (!originalCustomer.getFirstName().equals(profileDtoCustomer.getFirstName())){
+            originalCustomer.setFirstName(profileDtoCustomer.getFirstName());
+        }
+        else if (!originalCustomer.getLastName().equals(profileDtoCustomer.getLastName())){
+            originalCustomer.setLastName(profileDtoCustomer.getLastName());
+        }
+        else if (!originalCustomer.getEmail().equals(profileDtoCustomer.getEmail())){
+            originalCustomer.setEmail(profileDtoCustomer.getEmail());
+        }
+        return originalCustomer;
     }
 }

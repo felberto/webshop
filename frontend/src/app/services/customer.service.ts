@@ -1,7 +1,9 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {SERVER_API_URL} from "../app.constants";
+import {Customer} from "../models/customer";
+import {CustomerProfileDto} from "../models/dto/customerProfileDto";
 
 @Injectable()
 export class CustomerService {
@@ -9,7 +11,19 @@ export class CustomerService {
   constructor(private http: HttpClient) {
   }
 
-  save(customer: any): Observable<any> {
-    return this.http.post(SERVER_API_URL + '/customer', customer);
+  save(customer: Customer): Observable<HttpResponse<Customer>> {
+    return this.http.post<Customer>(SERVER_API_URL + '/customer', customer, {observe: 'response'});
+  }
+
+  update(profileDto: CustomerProfileDto): Observable<HttpResponse<Customer>> {
+    return this.http.put<Customer>(SERVER_API_URL + `/customer/${profileDto.id}`, profileDto, {observe: 'response'});
+  }
+
+  getProfile(id: number): Observable<HttpResponse<Customer>>{
+    return this.http.get<Customer>(SERVER_API_URL + `/customer/${id}`, {observe: 'response'});
+  }
+
+  deactivateProfile(id: number): Observable<{}> {
+    return this.http.put(SERVER_API_URL + `/customer/deactivated/${id}`, {observe: 'response'});
   }
 }
